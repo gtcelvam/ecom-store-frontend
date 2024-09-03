@@ -33,3 +33,62 @@ export const showCaseList: ShowCardType[] = [
       "https://rukminim2.flixcart.com/image/850/1000/kn0n6a80/t-shirt/r/w/d/l-plain-t-shirt-the-shopping-field-original-imagfrr8z7xfkrzh.jpeg?q=90&crop=false",
   },
 ];
+
+export const FooterCompanyLink = [
+  {
+    id: 1,
+    name: "About",
+    link: "/",
+  },
+  {
+    id: 2,
+    name: "Contact Us",
+    link: "/",
+  },
+  {
+    id: 3,
+    name: "Support",
+    link: "/",
+  },
+  {
+    id: 4,
+    name: "Careers",
+    link: "/",
+  },
+];
+
+export const FooterQuickLink = [
+  {
+    id: 1,
+    name: "Share Location",
+    link: "/",
+  },
+  {
+    id: 2,
+    name: "Orders Tracking",
+    link: "/",
+  },
+  {
+    id: 3,
+    name: "Size Guide",
+    link: "/",
+  },
+  {
+    id: 4,
+    name: "FAQs",
+    link: "/",
+  },
+];
+
+export const FooterLegalLink = [
+  {
+    id: 1,
+    name: "Terms & Condition",
+    link: "/",
+  },
+  {
+    id: 2,
+    name: "Privacy Policy",
+    link: "/",
+  },
+];
