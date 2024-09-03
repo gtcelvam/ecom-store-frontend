@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
 import { AuthenticationType, ShowCardType } from "./constants";
+import { FooterCompanyLink } from "@/utils/constants";
 
 export interface MobileRightMenuComponentProps {
   handleOpenModel: () => void;
@@ -16,6 +17,15 @@ export interface CustomDialogProps {
   children: ReactNode;
   onSubmit: () => void;
   handleClose: () => void;
+}
+
+export interface SocialIconProps {
+  icon: ReactNode;
+}
+
+export interface FooterLinkComponentProps {
+  title: string;
+  list: typeof FooterCompanyLink;
 }
 
 export interface AuthenticationComponentProps {
