@@ -1,4 +1,5 @@
-import { ShowCardType } from "@/types/constants";
+import { ProductCard } from "@/types/constants";
+import SALES_DAY_PIC from "@/public/images/salesDay.webp";
 
 export const LOGO_URL =
   "https://img.freepik.com/premium-vector/ts-logo-design-vector-illustration_742779-2098.jpg";
@@ -11,9 +12,10 @@ export const CAROUSEL_IMAGE = [
 
 export const commonStyles = {
   themeBtn: "bg-shop-primary text-shop-white",
+  themePadding: "p-2",
 };
 
-export const showCaseList: ShowCardType[] = [
+export const showCaseList: ProductCard[] = [
   {
     id: 1,
     title: "Hoodies & Sweetshirt",
@@ -33,6 +35,23 @@ export const showCaseList: ShowCardType[] = [
       "https://rukminim2.flixcart.com/image/850/1000/kn0n6a80/t-shirt/r/w/d/l-plain-t-shirt-the-shopping-field-original-imagfrr8z7xfkrzh.jpeg?q=90&crop=false",
   },
 ];
+
+export const youngFashionList: ProductCard[] = [
+  {
+    id: 1,
+    title: "Trending on Instagram",
+    image:
+      "https://static.vecteezy.com/system/resources/previews/006/165/355/non_2x/portrait-of-cheerful-young-asian-woman-student-in-casual-clothes-with-backpack-using-laptop-and-pointing-at-camera-with-finger-isolated-on-yellow-background-education-in-college-university-concept-photo.jpg",
+  },
+  {
+    id: 2,
+    title: "All under ₹500",
+    image:
+      "https://img.freepik.com/premium-photo/guy-with-red-curly-hair-red-tshirt-with-fashion-hat-yellow-background-unaltered_561613-14515.jpg",
+  },
+];
+
+export const SALES_DAY_IMAGE = SALES_DAY_PIC;
 
 export const FooterCompanyLink = [
   {
