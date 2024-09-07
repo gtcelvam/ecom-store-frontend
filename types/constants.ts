@@ -3,7 +3,7 @@ export enum AuthenticationType {
   signup = "signup",
 }
 
-export interface ShowCardType {
+export interface ProductCard {
   id: string | number;
   title: string;
   image: string;

@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { AuthenticationType, ShowCardType } from "./constants";
+import { AuthenticationType, ProductCard } from "./constants";
 import { FooterCompanyLink } from "@/utils/constants";
 
 export interface MobileRightMenuComponentProps {
@@ -34,10 +34,14 @@ export interface AuthenticationComponentProps {
   type: AuthenticationType;
 }
 
-export interface ShowCardComponentProp {
-  showCaseCard: ShowCardType;
+export interface ProductCardComponentProp {
+  card: ProductCard;
+  className?: string;
+  classHead?: string;
+  width?: number;
+  height?: number;
 }
 
-export interface ShowCardListComponentProps {
-  showCaseList: ShowCardType[];
+export interface ProductCardListComponentProps {
+  cardList: ProductCard[];
 }
