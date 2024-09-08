@@ -1,3 +1,4 @@
+import { onChangeEvent } from "@/types/events";
 import { CAROUSEL_IMAGE } from "./constants";
 
 export const handleBannerList: () => Promise<string[]> = () => {

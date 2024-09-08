@@ -34,6 +34,10 @@ export interface AuthenticationComponentProps {
   type: AuthenticationType;
 }
 
+export interface SignInComponentProps {
+  handleSwitchAuth: (type: AuthenticationType) => void;
+}
+
 export interface ProductCardComponentProp {
   card: ProductCard;
   className?: string;
