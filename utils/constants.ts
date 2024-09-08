@@ -1,6 +1,15 @@
 import { ProductCard } from "@/types/constants";
 import SALES_DAY_PIC from "@/public/images/salesDay.webp";
 
+//Snippets
+export const SNIPPET_COMMA = "&apos;";
+
+//configs
+export const BACKEND_URL = {
+  prod: process.env.NEXT_PUBLIC_BACKEND_URL,
+  dev: process.env.NEXT_PUBLIC_BACKEND_URL_LOCAL,
+};
+
 export const LOGO_URL =
   "https://img.freepik.com/premium-vector/ts-logo-design-vector-illustration_742779-2098.jpg";
 
@@ -111,3 +120,15 @@ export const FooterLegalLink = [
     link: "/",
   },
 ];
+
+export const signUpForm = {
+  name: "",
+  email: "",
+  password: "",
+  confirmPassword: "",
+};
+
+export const loginForm = {
+  email: "",
+  password: "",
+};

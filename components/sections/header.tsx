@@ -16,10 +16,15 @@ import { LOGO_URL } from "@/utils/constants";
 import { AuthenticationType } from "@/types/constants";
 import { HamburgerMenuIcon } from "@radix-ui/react-icons";
 import { MobileRightMenuComponentProps } from "@/types/component";
+import { useSelector } from "react-redux";
+import { RootState } from "@/lib/store";
 
 const Header = () => {
   //state values
   const [open, setOpen] = useState(false);
+
+  //hooks
+  const { formType } = useSelector((state: RootState) => state.user);
 
   //functions
   const handleOpenModel = () => setOpen(true);
@@ -50,7 +55,7 @@ const Header = () => {
 
       {/* Models */}
       <AuthenticationComponent
-        type={AuthenticationType.login}
+        type={formType}
         open={open}
         handleClose={handleCloseModel}
       />
