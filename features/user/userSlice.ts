@@ -1,12 +1,18 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { signupUser } from "./userThunks";
-import { AuthenticationType } from "@/types/constants";
+import { loginUser, signupUser } from "./userThunks";
+import { AuthenticationType, userDataType } from "@/types/constants";
 
 const initialState = {
   isAuthOpen: false,
   formType: AuthenticationType.login,
   isLoading: false,
-  userData: {},
+  userData: {
+    name: "",
+    email: "",
+    id: "",
+    mobile: "",
+  },
+  isUserLoggedIn: false,
   isError: false,
 };
 
@@ -22,8 +28,34 @@ const userSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
+    // Signup user case
     builder.addCase(signupUser.pending, (state) => {
       state.isLoading = true;
+    });
+    builder.addCase(signupUser.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.userData = action.payload as any;
+    });
+    builder.addCase(signupUser.rejected, (state) => {
+      state.isLoading = false;
+      state.isError = true;
+    });
+
+    //Login User Case
+    builder.addCase(loginUser.pending, (state) => {
+      state.isLoading = true;
+    });
+
+    builder.addCase(loginUser.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.userData = action.payload as any;
+      state.isUserLoggedIn = true;
+      state.isAuthOpen = false;
+    });
+
+    builder.addCase(loginUser.rejected, (state) => {
+      state.isLoading = false;
+      state.isError = true;
     });
   },
 });

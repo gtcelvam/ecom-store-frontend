@@ -1,10 +1,16 @@
 import { ReactNode } from "react";
-import { AuthenticationType, ProductCard } from "./constants";
+import { AuthenticationType, ProductCard, userDataType } from "./constants";
 import { FooterCompanyLink } from "@/utils/constants";
+import { onChangeEvent } from "./events";
 
-export interface MobileRightMenuComponentProps {
+export interface LoggedInRightSectionProps {
+  userData: userDataType;
+  isUserLoggedIn: boolean;
   handleOpenModel: () => void;
 }
+
+export interface MobileRightMenuComponentProps
+  extends LoggedInRightSectionProps {}
 
 export interface HomeCarouselType {
   bannerList: string[];
@@ -15,7 +21,7 @@ export interface CustomDialogProps {
   description: string;
   buttonText: string;
   children: ReactNode;
-  onSubmit: () => void;
+  onSubmit: (data?: any) => void;
   handleClose: () => void;
 }
 
@@ -34,8 +40,10 @@ export interface AuthenticationComponentProps {
   type: AuthenticationType;
 }
 
-export interface SignInComponentProps {
+export interface SignInComponentProps<T> {
   handleSwitchAuth: (type: AuthenticationType) => void;
+  formData: T;
+  handleFormChange: (e: onChangeEvent) => void;
 }
 
 export interface ProductCardComponentProp {
