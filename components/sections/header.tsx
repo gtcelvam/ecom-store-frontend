@@ -1,34 +1,43 @@
 "use client";
-import React, { FC, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import Image from "next/image";
+import { useDispatch, useSelector } from "react-redux";
 import {
   Sheet,
-  SheetClose,
   SheetContent,
-  SheetDescription,
   SheetFooter,
   SheetHeader,
   SheetTitle,
 } from "@/components/ui/sheet";
 import { Button } from "../ui/button";
 import AuthenticationComponent from "../groups/login";
-import { LOGO_URL } from "@/utils/constants";
-import { AuthenticationType } from "@/types/constants";
+import { COOKIE_ACCESS_TOKEN, LOGO_URL } from "@/utils/constants";
 import { HamburgerMenuIcon } from "@radix-ui/react-icons";
-import { MobileRightMenuComponentProps } from "@/types/component";
-import { useSelector } from "react-redux";
+import {
+  LoggedInRightSectionProps,
+  MobileRightMenuComponentProps,
+} from "@/types/component";
 import { RootState } from "@/lib/store";
+import { handleSetAuthOpen } from "@/features/user/userSlice";
+import { handleCookie } from "@/utils/helpers";
 
 const Header = () => {
-  //state values
-  const [open, setOpen] = useState(false);
-
   //hooks
-  const { formType } = useSelector((state: RootState) => state.user);
+  const { isUserLoggedIn, userData, formType, isAuthOpen } = useSelector(
+    (state: RootState) => state.user
+  );
+  const dispatch = useDispatch();
 
   //functions
-  const handleOpenModel = () => setOpen(true);
-  const handleCloseModel = () => setOpen(false);
+  const handleOpenModel = () => dispatch(handleSetAuthOpen(true));
+  const handleCloseModel = () => dispatch(handleSetAuthOpen(false));
+
+  //useEffects
+  useEffect(() => {
+    if (userData) {
+      const token = handleCookie.get(COOKIE_ACCESS_TOKEN);
+    }
+  }, [userData]);
 
   return (
     <div className="flex items-center justify-between bg-shop-white h-[50px] px-2">
@@ -44,19 +53,25 @@ const Header = () => {
       {/* Menus Ends Here */}
 
       {/* Right Section */}
-      <Button className="hidden sm:block" onClick={handleOpenModel}>
-        LOGIN
-      </Button>
+      <RightSection
+        isUserLoggedIn={isUserLoggedIn}
+        userData={userData}
+        handleOpenModel={handleOpenModel}
+      />
       {/* Right Section Ends Here */}
 
       {/* Mobile Right Nav */}
-      <MobileRightNavComponent handleOpenModel={handleOpenModel} />
+      <MobileRightNavComponent
+        isUserLoggedIn={isUserLoggedIn}
+        userData={userData}
+        handleOpenModel={handleOpenModel}
+      />
       {/* Mobile Right Nav Ends Here */}
 
       {/* Models */}
       <AuthenticationComponent
         type={formType}
-        open={open}
+        open={isAuthOpen}
         handleClose={handleCloseModel}
       />
       {/* Models Ends Here */}
@@ -66,9 +81,30 @@ const Header = () => {
 
 export default Header;
 
+const RightSection: FC<LoggedInRightSectionProps> = (props) => {
+  //props
+  const { isUserLoggedIn, userData, handleOpenModel } = props;
+
+  if (!Boolean(isUserLoggedIn && "name" in userData)) {
+    return (
+      <>
+        <Button className="hidden sm:block" onClick={handleOpenModel}>
+          LOGIN
+        </Button>
+      </>
+    );
+  }
+
+  return (
+    <div>
+      <p>Welcome {userData.name}</p>
+    </div>
+  );
+};
+
 const MobileRightNavComponent: FC<MobileRightMenuComponentProps> = (props) => {
   //props
-  const { handleOpenModel } = props;
+  const { isUserLoggedIn, userData, handleOpenModel } = props;
 
   //state values
   const [isSideBarOpen, setIsSideBarOpen] = useState(false);
@@ -110,9 +146,18 @@ const MobileRightNavComponent: FC<MobileRightMenuComponentProps> = (props) => {
           </div>
           {/* Menus Ends Here */}
           <SheetFooter>
-            <Button className="block sm:hidden" onClick={handleOpenModel}>
-              LOGIN
-            </Button>
+            {!isUserLoggedIn && (
+              <Button className="block sm:hidden" onClick={handleOpenModel}>
+                LOGIN
+              </Button>
+            )}
+            {/* User Logged In */}
+            {isUserLoggedIn && (
+              <p className="text-shop-black font-medium text-center">
+                Welcome {userData.name}
+              </p>
+            )}
+            {/* User Logged In Ends Here */}
           </SheetFooter>
         </SheetContent>
       </Sheet>

@@ -10,6 +10,8 @@ export const BACKEND_URL = {
   dev: process.env.NEXT_PUBLIC_BACKEND_URL_LOCAL,
 };
 
+export const COOKIE_ACCESS_TOKEN = "access-token";
+
 export const LOGO_URL =
   "https://img.freepik.com/premium-vector/ts-logo-design-vector-illustration_742779-2098.jpg";
 
@@ -125,6 +127,7 @@ export const signUpForm = {
   name: "",
   email: "",
   password: "",
+  mobile: -1,
   confirmPassword: "",
 };
 

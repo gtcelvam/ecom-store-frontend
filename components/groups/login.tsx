@@ -1,4 +1,4 @@
-import React, { FC, useRef, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import CustomDialog from "../elements/CustomDialog";
 import {
@@ -10,19 +10,33 @@ import { AuthenticationType } from "@/types/constants";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 import { handleFormType } from "@/features/user/userSlice";
-import { loginFormDataType, signupFormDataType } from "@/types/states";
+import {
+  authFormDataType,
+  loginFormDataType,
+  signupFormDataType,
+} from "@/types/states";
 import { loginForm, signUpForm } from "@/utils/constants";
 import { onChangeEvent } from "@/types/events";
+import { loginUser, signupUser } from "@/features/user/userThunks";
 
 const AuthenticationComponent: FC<AuthenticationComponentProps> = (props) => {
   //props
   const { open, handleClose, type } = props;
+
+  //state values
+  const [formData, setFormData] = useState<authFormDataType>(signUpForm);
+
+  //functions
+  const handleFormChange = (e: onChangeEvent) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
   //hooks
   const dispatch = useDispatch();
 
   //constants
   const isLogin = type === AuthenticationType.login;
+  const emptyData = isLogin ? loginForm : signUpForm;
 
   const authenticationTitle: Partial<CustomDialogProps> = {
     title: isLogin ? "LOGIN" : "SIGN UP",
@@ -35,6 +49,23 @@ const AuthenticationComponent: FC<AuthenticationComponentProps> = (props) => {
     dispatch(handleFormType(type));
   };
 
+  const handleSubmit = () => {
+    if (type === AuthenticationType.login) {
+      dispatch<any>(loginUser(formData));
+      return;
+    }
+    const { confirmPassword, ...rest } = formData as signupFormDataType;
+    dispatch<any>(signupUser(rest));
+    setFormData(emptyData);
+  };
+
+  //useEffects
+  useEffect(() => {
+    return () => {
+      setFormData(emptyData);
+    };
+  }, []);
+
   if (!open) return <></>;
 
   return (
@@ -42,29 +73,31 @@ const AuthenticationComponent: FC<AuthenticationComponentProps> = (props) => {
       title={authenticationTitle.title as string}
       description={authenticationTitle.description as string}
       buttonText={authenticationTitle.buttonText as string}
-      onSubmit={() => null}
+      onSubmit={handleSubmit}
       handleClose={handleClose}
     >
       {isLogin ? (
-        <LoginComponent handleSwitchAuth={handleSwitchAuth} />
+        <LoginComponent
+          formData={formData}
+          handleFormChange={handleFormChange}
+          handleSwitchAuth={handleSwitchAuth}
+        />
       ) : (
-        <SignInComponent handleSwitchAuth={handleSwitchAuth} />
+        <SignInComponent
+          formData={formData as signupFormDataType}
+          handleFormChange={handleFormChange}
+          handleSwitchAuth={handleSwitchAuth}
+        />
       )}
     </CustomDialog>
   );
 };
 
-const SignInComponent: FC<SignInComponentProps> = (props) => {
+const SignInComponent: FC<SignInComponentProps<signupFormDataType>> = (
+  props
+) => {
   //props
-  const { handleSwitchAuth } = props;
-
-  //state values
-  const [formData, setFormData] = useState<signupFormDataType>(signUpForm);
-
-  //functions
-  const handleFormChange = (e: onChangeEvent) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+  const { formData, handleFormChange, handleSwitchAuth } = props;
 
   return (
     <div className="flex flex-col items-center justify-center gap-4">
@@ -85,6 +118,16 @@ const SignInComponent: FC<SignInComponentProps> = (props) => {
           name="email"
           placeholder="Email"
           value={formData.email}
+          onChange={handleFormChange}
+        />
+      </div>
+      <div className="grid w-full max-w-sm items-center gap-1.5">
+        <Label htmlFor="email">PLEASE ENTER YOUR MOBILE NUMBER</Label>
+        <Input
+          id="number"
+          name="mobile"
+          placeholder="Phone Number"
+          value={formData.mobile}
           onChange={handleFormChange}
         />
       </div>
@@ -123,17 +166,9 @@ const SignInComponent: FC<SignInComponentProps> = (props) => {
   );
 };
 
-const LoginComponent: FC<SignInComponentProps> = (props) => {
+const LoginComponent: FC<SignInComponentProps<loginFormDataType>> = (props) => {
   //props
-  const { handleSwitchAuth } = props;
-
-  //state values
-  const [formData, setFormData] = useState<loginFormDataType>(loginForm);
-
-  //functions
-  const handleFormChange = (e: onChangeEvent) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+  const { formData, handleFormChange, handleSwitchAuth } = props;
 
   return (
     <div className="flex flex-col items-center justify-center gap-4">
