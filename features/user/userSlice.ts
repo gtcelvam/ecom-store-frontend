@@ -26,6 +26,10 @@ const userSlice = createSlice({
     handleFormType: (state, action) => {
       state.formType = action.payload;
     },
+    handleUserLoginByToken: (state, action) => {
+      state.userData = action.payload;
+      state.isUserLoggedIn = true;
+    },
   },
   extraReducers: (builder) => {
     // Signup user case
@@ -60,6 +64,7 @@ const userSlice = createSlice({
   },
 });
 
-export const { handleFormType, handleSetAuthOpen } = userSlice.actions;
+export const { handleFormType, handleSetAuthOpen, handleUserLoginByToken } =
+  userSlice.actions;
 
 export default userSlice.reducer;

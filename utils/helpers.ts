@@ -1,6 +1,10 @@
 import { onChangeEvent } from "@/types/events";
 import { CAROUSEL_IMAGE } from "./constants";
 
+export const getAuthHeader = (details: any) => {
+  return { authorization: `Bearer ${details?.token}` };
+};
+
 export const handleBannerList: () => Promise<string[]> = () => {
   return new Promise((res, rej) => {
     res(CAROUSEL_IMAGE);

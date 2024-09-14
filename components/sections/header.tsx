@@ -11,17 +11,23 @@ import {
 } from "@/components/ui/sheet";
 import { Button } from "../ui/button";
 import AuthenticationComponent from "../groups/login";
-import { COOKIE_ACCESS_TOKEN, LOGO_URL } from "@/utils/constants";
+import { LOGO_URL } from "@/utils/constants";
 import { HamburgerMenuIcon } from "@radix-ui/react-icons";
 import {
+  HeaderProps,
   LoggedInRightSectionProps,
   MobileRightMenuComponentProps,
 } from "@/types/component";
 import { RootState } from "@/lib/store";
-import { handleSetAuthOpen } from "@/features/user/userSlice";
-import { handleCookie } from "@/utils/helpers";
+import {
+  handleSetAuthOpen,
+  handleUserLoginByToken,
+} from "@/features/user/userSlice";
 
-const Header = () => {
+const Header: FC<HeaderProps> = (props) => {
+  //props
+  const { user = null } = props;
+
   //hooks
   const { isUserLoggedIn, userData, formType, isAuthOpen } = useSelector(
     (state: RootState) => state.user
@@ -34,10 +40,8 @@ const Header = () => {
 
   //useEffects
   useEffect(() => {
-    if (userData) {
-      const token = handleCookie.get(COOKIE_ACCESS_TOKEN);
-    }
-  }, [userData]);
+    if (user) dispatch(handleUserLoginByToken(user));
+  }, [user, dispatch]);
 
   return (
     <div className="flex items-center justify-between bg-shop-white h-[50px] px-2">
