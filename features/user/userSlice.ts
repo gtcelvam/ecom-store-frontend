@@ -1,6 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { loginUser, signupUser } from "./userThunks";
 import { AuthenticationType, userDataType } from "@/types/constants";
+import { COOKIE_ACCESS_TOKEN, defaultUserData } from "@/utils/constants";
+import { handleCookie } from "@/utils/helpers";
 
 const initialState = {
   isAuthOpen: false,
@@ -29,6 +31,11 @@ const userSlice = createSlice({
     handleUserLoginByToken: (state, action) => {
       state.userData = action.payload;
       state.isUserLoggedIn = true;
+    },
+    handleUserLogout: (state) => {
+      state.userData = defaultUserData;
+      state.isUserLoggedIn = false;
+      handleCookie.clear(COOKIE_ACCESS_TOKEN);
     },
   },
   extraReducers: (builder) => {
@@ -64,7 +71,11 @@ const userSlice = createSlice({
   },
 });
 
-export const { handleFormType, handleSetAuthOpen, handleUserLoginByToken } =
-  userSlice.actions;
+export const {
+  handleFormType,
+  handleSetAuthOpen,
+  handleUserLoginByToken,
+  handleUserLogout,
+} = userSlice.actions;
 
 export default userSlice.reducer;

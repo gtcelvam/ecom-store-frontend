@@ -135,3 +135,10 @@ export const loginForm = {
   email: "",
   password: "",
 };
+
+export const defaultUserData = {
+  name: "",
+  email: "",
+  id: "",
+  mobile: "",
+};
