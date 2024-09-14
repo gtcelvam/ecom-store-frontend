@@ -46,6 +46,8 @@ const userSlice = createSlice({
     builder.addCase(signupUser.fulfilled, (state, action) => {
       state.isLoading = false;
       state.userData = action.payload as any;
+      state.isUserLoggedIn = true;
+      state.isAuthOpen = false;
     });
     builder.addCase(signupUser.rejected, (state) => {
       state.isLoading = false;

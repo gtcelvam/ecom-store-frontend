@@ -7,7 +7,9 @@ import { COOKIE_ACCESS_TOKEN } from "@/utils/constants";
 export const handleSignUp = async (userDetails: userDetailsAPIPayload) => {
   try {
     const { data }: any = await instance.post(authAPIList.signup, userDetails);
-    return data?.data;
+    const { data: userData, token } = data;
+    handleCookie.set(COOKIE_ACCESS_TOKEN, token);
+    return userData[0];
   } catch (error) {
     console.log("Sign up error : ", error);
     throw error;
