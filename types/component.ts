@@ -11,6 +11,7 @@ export interface LoggedInRightSectionProps {
   userData: userDataType;
   isUserLoggedIn: boolean;
   handleOpenModel: () => void;
+  handleLogout: () => void;
 }
 
 export interface MobileRightMenuComponentProps

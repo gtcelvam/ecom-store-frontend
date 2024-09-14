@@ -22,6 +22,7 @@ import { RootState } from "@/lib/store";
 import {
   handleSetAuthOpen,
   handleUserLoginByToken,
+  handleUserLogout,
 } from "@/features/user/userSlice";
 
 const Header: FC<HeaderProps> = (props) => {
@@ -37,6 +38,7 @@ const Header: FC<HeaderProps> = (props) => {
   //functions
   const handleOpenModel = () => dispatch(handleSetAuthOpen(true));
   const handleCloseModel = () => dispatch(handleSetAuthOpen(false));
+  const handleLogout = () => dispatch(handleUserLogout());
 
   //useEffects
   useEffect(() => {
@@ -61,6 +63,7 @@ const Header: FC<HeaderProps> = (props) => {
         isUserLoggedIn={isUserLoggedIn}
         userData={userData}
         handleOpenModel={handleOpenModel}
+        handleLogout={handleLogout}
       />
       {/* Right Section Ends Here */}
 
@@ -69,6 +72,7 @@ const Header: FC<HeaderProps> = (props) => {
         isUserLoggedIn={isUserLoggedIn}
         userData={userData}
         handleOpenModel={handleOpenModel}
+        handleLogout={handleLogout}
       />
       {/* Mobile Right Nav Ends Here */}
 
@@ -87,7 +91,12 @@ export default Header;
 
 const RightSection: FC<LoggedInRightSectionProps> = (props) => {
   //props
-  const { isUserLoggedIn, userData = { name: "" }, handleOpenModel } = props;
+  const {
+    isUserLoggedIn,
+    userData = { name: "" },
+    handleOpenModel,
+    handleLogout,
+  } = props;
 
   if (!Boolean(isUserLoggedIn && "name" in userData)) {
     return (
@@ -100,15 +109,23 @@ const RightSection: FC<LoggedInRightSectionProps> = (props) => {
   }
 
   return (
-    <div>
+    <div className="flex items-center gap-4">
       <p>Welcome {userData.name}</p>
+      <Button className="hidden sm:block" onClick={handleLogout}>
+        LOG OUT
+      </Button>
     </div>
   );
 };
 
 const MobileRightNavComponent: FC<MobileRightMenuComponentProps> = (props) => {
   //props
-  const { isUserLoggedIn, userData = { name: "" }, handleOpenModel } = props;
+  const {
+    isUserLoggedIn,
+    userData = { name: "" },
+    handleOpenModel,
+    handleLogout,
+  } = props;
 
   //state values
   const [isSideBarOpen, setIsSideBarOpen] = useState(false);
@@ -149,7 +166,7 @@ const MobileRightNavComponent: FC<MobileRightMenuComponentProps> = (props) => {
             </p>
           </div>
           {/* Menus Ends Here */}
-          <SheetFooter>
+          <SheetFooter className="flex-col gap-3">
             {!isUserLoggedIn && (
               <Button className="block sm:hidden" onClick={handleOpenModel}>
                 LOGIN
@@ -157,9 +174,14 @@ const MobileRightNavComponent: FC<MobileRightMenuComponentProps> = (props) => {
             )}
             {/* User Logged In */}
             {isUserLoggedIn && (
-              <p className="text-shop-black font-medium text-center">
-                Welcome {userData.name}
-              </p>
+              <>
+                <p className="text-shop-black font-medium text-center">
+                  Welcome {userData.name}
+                </p>
+                <Button className="block sm:hidden" onClick={handleLogout}>
+                  LOG OUT
+                </Button>
+              </>
             )}
             {/* User Logged In Ends Here */}
           </SheetFooter>
