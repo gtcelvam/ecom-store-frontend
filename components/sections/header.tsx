@@ -87,7 +87,7 @@ export default Header;
 
 const RightSection: FC<LoggedInRightSectionProps> = (props) => {
   //props
-  const { isUserLoggedIn, userData, handleOpenModel } = props;
+  const { isUserLoggedIn, userData = { name: "" }, handleOpenModel } = props;
 
   if (!Boolean(isUserLoggedIn && "name" in userData)) {
     return (
@@ -108,7 +108,7 @@ const RightSection: FC<LoggedInRightSectionProps> = (props) => {
 
 const MobileRightNavComponent: FC<MobileRightMenuComponentProps> = (props) => {
   //props
-  const { isUserLoggedIn, userData, handleOpenModel } = props;
+  const { isUserLoggedIn, userData = { name: "" }, handleOpenModel } = props;
 
   //state values
   const [isSideBarOpen, setIsSideBarOpen] = useState(false);

@@ -13,7 +13,10 @@ export const handleBannerList: () => Promise<string[]> = () => {
 
 export const handleCookie = {
   set: (name: string, value: string) => {
-    document.cookie = `${name}=${value}`;
+    const date = new Date();
+    date.setTime(date.getTime() + 24 * 60 * 60 * 1000);
+    const expires = `expires=${date.toUTCString()}`;
+    document.cookie = `${name}=${value}; ${expires}; path="/`;
   },
   get: (name: string) => {
     if (!name) return null;

@@ -30,7 +30,7 @@ export default async function RootLayout({
       <title>Ts E-Comm Shop</title>
       <body className={inter.className}>
         <Providers>
-          <Header user={result[0]} />
+          <Header user={result?.[0]} />
           {children}
           <Footer />
         </Providers>
