@@ -10,6 +10,7 @@ export const handleSignUp = async (userDetails: userDetailsAPIPayload) => {
     return data?.data;
   } catch (error) {
     console.log("Sign up error : ", error);
+    throw error;
   }
 };
 
@@ -21,6 +22,7 @@ export const handleLogin = async (userDetails: userDetailsAPIPayload) => {
     return userData[0];
   } catch (error) {
     console.log("Sign up error : ", error);
+    throw error;
   }
 };
 
