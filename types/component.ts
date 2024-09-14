@@ -3,6 +3,10 @@ import { AuthenticationType, ProductCard, userDataType } from "./constants";
 import { FooterCompanyLink } from "@/utils/constants";
 import { onChangeEvent } from "./events";
 
+export interface HeaderProps {
+  user: userDataType;
+}
+
 export interface LoggedInRightSectionProps {
   userData: userDataType;
   isUserLoggedIn: boolean;
