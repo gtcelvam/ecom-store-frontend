@@ -1,6 +1,7 @@
 "use client";
 import React, { FC, useEffect, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
 import {
   Sheet,
@@ -11,7 +12,7 @@ import {
 } from "@/components/ui/sheet";
 import { Button } from "../ui/button";
 import AuthenticationComponent from "../groups/login";
-import { LOGO_URL } from "@/utils/constants";
+import { LOGO_URL, pageRoutes } from "@/utils/constants";
 import { HamburgerMenuIcon } from "@radix-ui/react-icons";
 import {
   HeaderProps,
@@ -47,14 +48,24 @@ const Header: FC<HeaderProps> = (props) => {
 
   return (
     <div className="flex items-center justify-between bg-shop-white h-[50px] px-2">
-      <Image width={80} height={70} src={LOGO_URL} alt="logo" />
+      <Link href={pageRoutes.home}>
+        <Image width={80} height={70} src={LOGO_URL} alt="logo" />
+      </Link>
 
       {/* Menus */}
-      <div className="flex items-center justify-center gap-10 hidden sm:flex">
-        <p className="text-shop-black font-medium	cursor-pointer">CATALOGUE</p>
-        <p className="text-shop-black font-medium	cursor-pointer">FASHION</p>
-        <p className="text-shop-black font-medium	cursor-pointer">FAVOURITE</p>
-        <p className="text-shop-black font-medium	cursor-pointer">LIFESTYLE</p>
+      <div className="items-center justify-center gap-10 hidden sm:flex">
+        <Link href={pageRoutes.products}>
+          <p className="text-shop-black font-medium	cursor-pointer">CATALOGUE</p>
+        </Link>
+        <Link href={pageRoutes.products}>
+          <p className="text-shop-black font-medium	cursor-pointer">FASHION</p>
+        </Link>
+        <Link href={pageRoutes.products}>
+          <p className="text-shop-black font-medium	cursor-pointer">FAVOURITE</p>
+        </Link>
+        <Link href={pageRoutes.products}>
+          <p className="text-shop-black font-medium	cursor-pointer">LIFESTYLE</p>
+        </Link>
       </div>
       {/* Menus Ends Here */}
 

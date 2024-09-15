@@ -1,6 +1,11 @@
 import { ProductCard } from "@/types/constants";
 import SALES_DAY_PIC from "@/public/images/salesDay.webp";
 
+export const pageRoutes = {
+  home: "/",
+  products: "/products",
+};
+
 //Snippets
 export const SNIPPET_COMMA = "&apos;";
 

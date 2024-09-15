@@ -1,5 +1,6 @@
 import { onChangeEvent } from "@/types/events";
 import { CAROUSEL_IMAGE } from "./constants";
+import toast from "react-hot-toast";
 
 export const getAuthHeader = (details: any) => {
   return { authorization: `Bearer ${details?.token}` };
@@ -34,4 +35,8 @@ export const handleCookie = {
     if (!name) return;
     document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
   },
+};
+
+export const handleToaster = () => {
+  return toast;
 };
