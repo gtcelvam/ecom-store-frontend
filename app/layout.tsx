@@ -7,6 +7,8 @@ import { COOKIE_ACCESS_TOKEN } from "@/utils/constants";
 import Providers from "./provider";
 import "./globals.css";
 import { getUserDetails } from "@/features/user/userAPIs";
+import Head from "next/head";
+import SocialMediaPreview from "@/components/groups/socialMediaPreview";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -28,6 +30,9 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <title>Ts E-Comm Shop</title>
+      <Head>
+        <SocialMediaPreview />
+      </Head>
       <body className={inter.className}>
         <Providers>
           <Header user={result?.[0]} />
