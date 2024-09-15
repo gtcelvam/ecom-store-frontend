@@ -142,3 +142,10 @@ export const defaultUserData = {
   id: "",
   mobile: "",
 };
+
+export const socialMediaMetaContent = {
+  title: "TS ECOM SHOP",
+  description: "Shopping Site Project",
+  image: LOGO_URL,
+  url: "https://ts-e-store.vercel.app",
+};
