@@ -1,4 +1,5 @@
 import { LOGO_URL, socialMediaMetaContent } from "@/utils/constants";
+import Link from "next/link";
 
 const SocialMediaPreview = () => {
   return (
@@ -23,6 +24,10 @@ const SocialMediaPreview = () => {
       />
       <meta name="twitter:image" content={LOGO_URL} />
       <meta name="twitter:site" content="@yourTwitterHandle" />
+      <link rel="icon" href={LOGO_URL} sizes="any" />
+      <Link rel="icon" href={LOGO_URL} type="image/svg+xml" />
+      <Link rel="apple-touch-icon" href={LOGO_URL} />
+      <Link rel="manifest" href="/site.webmanifest" />
     </>
   );
 };
