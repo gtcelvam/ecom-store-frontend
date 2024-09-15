@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { cookies } from "next/headers";
 import { Inter } from "next/font/google";
+import { Toaster } from "react-hot-toast";
 import Header from "@/components/sections/header";
 import Footer from "@/components/sections/footer";
 import { COOKIE_ACCESS_TOKEN, socialMediaMetaContent } from "@/utils/constants";
@@ -39,6 +40,7 @@ export default async function RootLayout({
           <Header user={result?.[0]} />
           {children}
           <Footer />
+          <Toaster position="bottom-right" reverseOrder={false} />
         </Providers>
       </body>
     </html>

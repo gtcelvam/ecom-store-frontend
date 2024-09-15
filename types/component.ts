@@ -2,6 +2,7 @@ import { ReactNode } from "react";
 import { AuthenticationType, ProductCard, userDataType } from "./constants";
 import { FooterCompanyLink } from "@/utils/constants";
 import { onChangeEvent } from "./events";
+import { InputProps } from "@/components/ui/input";
 
 export interface HeaderProps {
   user: userDataType;
@@ -28,6 +29,10 @@ export interface CustomDialogProps {
   children: ReactNode;
   onSubmit: (data?: any) => void;
   handleClose: () => void;
+}
+
+export interface CustomSearchBarProps extends InputProps {
+  [key: string]: any;
 }
 
 export interface SocialIconProps {
@@ -57,6 +62,7 @@ export interface ProductCardComponentProp {
   classHead?: string;
   width?: number;
   height?: number;
+  href?: string;
 }
 
 export interface ProductCardListComponentProps {

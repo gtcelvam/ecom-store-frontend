@@ -1,15 +1,16 @@
-import { Button } from "@/components/ui/button";
+import Image from "next/image";
+import Link from "next/link";
+import { FC } from "react";
 import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
 import { ProductCardComponentProp } from "@/types/component";
-import Image from "next/image";
-import { FC } from "react";
+import { DoubleArrowRightIcon } from "@radix-ui/react-icons";
+import { pageRoutes } from "@/utils/constants";
 
 const ProductCard: FC<ProductCardComponentProp> = (props) => {
   //props
@@ -19,6 +20,7 @@ const ProductCard: FC<ProductCardComponentProp> = (props) => {
     classHead = "",
     width = 300,
     height = 150,
+    href = pageRoutes.products,
   } = props;
 
   return (
@@ -33,8 +35,11 @@ const ProductCard: FC<ProductCardComponentProp> = (props) => {
         />
         <CardTitle className="sm:w-[300px] px-2">{card.title}</CardTitle>
       </CardHeader>
-      <CardContent className="px-2">
+      <CardContent className="flex justify-between px-2">
         <CardDescription>explore more</CardDescription>
+        <Link href={href}>
+          <DoubleArrowRightIcon className="font-bold" />
+        </Link>
       </CardContent>
       {/* <CardFooter>
         <Button>Button</Button>
