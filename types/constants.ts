@@ -13,4 +13,5 @@ export interface ProductCard {
   id: string | number;
   title: string;
   image: string;
+  price?: string | number;
 }

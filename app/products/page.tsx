@@ -1,8 +1,8 @@
 import React from "react";
 import SearchBar from "@/components/elements/searchBar";
-import ProductCard from "@/components/elements/productCard";
-import { showCaseList } from "@/utils/constants";
+import { pageRoutes, SampleProductList } from "@/utils/constants";
 import { MixerHorizontalIcon } from "@radix-ui/react-icons";
+import ProductListCard from "@/components/elements/productListCard";
 
 const ProductsPage = () => {
   //constants
@@ -29,8 +29,13 @@ const ProductsPage = () => {
       <div
         className={`flex flex-col sm:flex-row items-center sm:items-start justify-center sm:justify-evenly gap-5 ${commonStyles.padding}`}
       >
-        {showCaseList.map((item) => (
-          <ProductCard key={item.id} card={item} />
+        {SampleProductList.map((item) => (
+          <ProductListCard
+            key={item.id}
+            classImage="h-[350px]"
+            card={item}
+            href={`${pageRoutes.products}/${item.id}`}
+          />
         ))}
       </div>
       {/* Main Section Ends Here */}

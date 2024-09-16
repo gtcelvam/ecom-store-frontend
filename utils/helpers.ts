@@ -1,5 +1,5 @@
 import { onChangeEvent } from "@/types/events";
-import { CAROUSEL_IMAGE } from "./constants";
+import { CAROUSEL_IMAGE, SampleProductList } from "./constants";
 import toast from "react-hot-toast";
 
 export const getAuthHeader = (details: any) => {
@@ -9,6 +9,15 @@ export const getAuthHeader = (details: any) => {
 export const handleBannerList: () => Promise<string[]> = () => {
   return new Promise((res, rej) => {
     res(CAROUSEL_IMAGE);
+  });
+};
+
+export const getProductDetailsById: (
+  id: string | number
+) => Promise<(typeof SampleProductList)[0]> = (id) => {
+  const productData = SampleProductList.filter((item) => item.id === id);
+  return new Promise((res, rej) => {
+    res(productData[0]);
   });
 };
 
