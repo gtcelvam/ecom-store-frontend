@@ -60,11 +60,21 @@ export interface ProductCardComponentProp {
   card: ProductCard;
   className?: string;
   classHead?: string;
+  classImage?: string;
   width?: number;
   height?: number;
   href?: string;
 }
 
+export interface ProductListCardComponentProps
+  extends ProductCardComponentProp {}
+
 export interface ProductCardListComponentProps {
   cardList: ProductCard[];
+}
+
+export interface ProductDetailsPageProps {
+  params: {
+    id: string;
+  };
 }

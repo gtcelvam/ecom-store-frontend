@@ -18,6 +18,7 @@ const ProductCard: FC<ProductCardComponentProp> = (props) => {
     card,
     className = "",
     classHead = "",
+    classImage = "",
     width = 300,
     height = 150,
     href = pageRoutes.products,
@@ -27,7 +28,7 @@ const ProductCard: FC<ProductCardComponentProp> = (props) => {
     <Card className={`w-70 sm:w-[300px] sm:p-0 sm:rounded-lg ${className}`}>
       <CardHeader className={`sm:w-[300px] p-0 ${classHead}`}>
         <Image
-          className="sm:rounded-t-lg"
+          className={classImage + " sm:rounded-t-lg"}
           width={width}
           height={height}
           src={card.image}
@@ -41,9 +42,6 @@ const ProductCard: FC<ProductCardComponentProp> = (props) => {
           <DoubleArrowRightIcon className="font-bold" />
         </Link>
       </CardContent>
-      {/* <CardFooter>
-        <Button>Button</Button>
-      </CardFooter> */}
     </Card>
   );
 };

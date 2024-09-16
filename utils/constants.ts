@@ -8,6 +8,7 @@ export const pageRoutes = {
 
 //Snippets
 export const SNIPPET_COMMA = "&apos;";
+export const RUPEES_SNIPPET = "₹ ";
 
 //configs
 export const BACKEND_URL = {
@@ -64,6 +65,41 @@ export const youngFashionList: ProductCard[] = [
     title: "All under ₹500",
     image:
       "https://img.freepik.com/premium-photo/guy-with-red-curly-hair-red-tshirt-with-fashion-hat-yellow-background-unaltered_561613-14515.jpg",
+  },
+];
+
+export const SampleProductList = [
+  {
+    id: 1,
+    title: "T-shirt",
+    description: "Lorem Ipsum ",
+    image:
+      "https://fullyfilmy.in/cdn/shop/products/New-Mockups---no-hanger---TShirt-Yellow.jpg?v=1639657077",
+    price: 200,
+  },
+  {
+    id: 2,
+    title: "Saree",
+    description: "Lorem Ipsum ",
+    image:
+      "https://i.pinimg.com/736x/d7/2f/4c/d72f4cf449b3d9545e975ba725ec87fc.jpg",
+    price: 500,
+  },
+  {
+    id: 3,
+    title: "Hoodie",
+    description: "Lorem Ipsum ",
+    image:
+      "https://codeswear.nyc3.cdn.digitaloceanspaces.com/hoodies/your-design-here-hoodie-bottlegreen/0.webp",
+    price: 650,
+  },
+  {
+    id: 4,
+    title: "Jeans Pant",
+    description: "Lorem Ipsum ",
+    image:
+      "https://images.othoba.com/images/thumbs/0495585_mens-slim-fit-stretchable-jeans-pant-light-blue.webp",
+    price: 750,
   },
 ];
 
