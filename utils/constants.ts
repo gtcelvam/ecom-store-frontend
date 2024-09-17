@@ -1,5 +1,6 @@
 import { ProductCard } from "@/types/constants";
 import SALES_DAY_PIC from "@/public/images/salesDay.webp";
+import CART_ICON from "@/public/icons/cart-bag.svg";
 
 export const pageRoutes = {
   home: "/",
@@ -30,6 +31,10 @@ export const CAROUSEL_IMAGE = [
 export const commonStyles = {
   themeBtn: "bg-shop-primary text-shop-white",
   themePadding: "p-2",
+};
+
+export const commonIcons = {
+  cartIcon: CART_ICON,
 };
 
 export const showCaseList: ProductCard[] = [

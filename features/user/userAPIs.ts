@@ -1,7 +1,13 @@
 import { userDetailsAPIPayload } from "@/types/api";
 import instance from "@/lib/axios";
 import { authAPIList } from "@/lib/apiList";
-import { getAuthHeader, handleCookie, handleToaster } from "@/utils/helpers";
+import {
+  getAuthHeader,
+  handleCookie,
+  handleErrorMessage,
+  handleSuccessMessage,
+  handleToaster,
+} from "@/utils/helpers";
 import { COOKIE_ACCESS_TOKEN } from "@/utils/constants";
 
 export const handleSignUp = async (userDetails: userDetailsAPIPayload) => {
@@ -22,10 +28,11 @@ export const handleLogin = async (userDetails: userDetailsAPIPayload) => {
     const { data }: any = await instance.post(authAPIList.login, userDetails);
     const { data: userData, token } = data;
     handleCookie.set(COOKIE_ACCESS_TOKEN, token);
+    handleSuccessMessage("Successfully Logged In!!!");
     return userData[0];
-  } catch (error) {
+  } catch (error: any) {
     console.log("Login error : ", error);
-    handleToaster().error("Login error");
+    handleErrorMessage(error);
     throw error;
   }
 };

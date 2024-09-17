@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/sheet";
 import { Button } from "../ui/button";
 import AuthenticationComponent from "../groups/login";
-import { LOGO_URL, pageRoutes } from "@/utils/constants";
+import { commonIcons, LOGO_URL, pageRoutes } from "@/utils/constants";
 import { HamburgerMenuIcon } from "@radix-ui/react-icons";
 import {
   HeaderProps,
@@ -34,6 +34,7 @@ const Header: FC<HeaderProps> = (props) => {
   const { isUserLoggedIn, userData, formType, isAuthOpen } = useSelector(
     (state: RootState) => state.user
   );
+
   const dispatch = useDispatch();
 
   //functions
@@ -109,6 +110,12 @@ const RightSection: FC<LoggedInRightSectionProps> = (props) => {
     handleLogout,
   } = props;
 
+  //state values
+  const { products } = useSelector((state: RootState) => state.cart);
+
+  //constants
+  const productOnCart = products.length;
+
   if (!Boolean(isUserLoggedIn && "name" in userData)) {
     return (
       <>
@@ -122,6 +129,15 @@ const RightSection: FC<LoggedInRightSectionProps> = (props) => {
   return (
     <div className="flex items-center gap-4">
       <p>Welcome {userData.name}</p>
+      <div className="relative">
+        <Image
+          width={20}
+          height={20}
+          src={commonIcons.cartIcon}
+          alt="cart-icon"
+        />
+        <p className="cart-bag-image">{productOnCart}</p>
+      </div>
       <Button className="hidden sm:block" onClick={handleLogout}>
         LOG OUT
       </Button>
@@ -165,16 +181,26 @@ const MobileRightNavComponent: FC<MobileRightMenuComponentProps> = (props) => {
           </SheetHeader>
           {/* Menus */}
           <div className="flex flex-col items-center justify-center gap-10 my-4 sm:hidden">
-            <p className="text-shop-black font-medium	cursor-pointer">
-              CATALOGUE
-            </p>
-            <p className="text-shop-black font-medium	cursor-pointer">FASHION</p>
-            <p className="text-shop-black font-medium	cursor-pointer">
-              FAVOURITE
-            </p>
-            <p className="text-shop-black font-medium	cursor-pointer">
-              LIFESTYLE
-            </p>
+            <Link href={pageRoutes.products}>
+              <p className="text-shop-black font-medium	cursor-pointer">
+                CATALOGUE
+              </p>
+            </Link>
+            <Link href={pageRoutes.products}>
+              <p className="text-shop-black font-medium	cursor-pointer">
+                FASHION
+              </p>
+            </Link>
+            <Link href={pageRoutes.products}>
+              <p className="text-shop-black font-medium	cursor-pointer">
+                FAVOURITE
+              </p>
+            </Link>
+            <Link href={pageRoutes.products}>
+              <p className="text-shop-black font-medium	cursor-pointer">
+                LIFESTYLE
+              </p>
+            </Link>
           </div>
           {/* Menus Ends Here */}
           <SheetFooter className="flex-col gap-3">
