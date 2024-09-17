@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 import { AuthenticationType, ProductCard, userDataType } from "./constants";
-import { FooterCompanyLink } from "@/utils/constants";
+import { FooterCompanyLink, SampleProductList } from "@/utils/constants";
 import { onChangeEvent } from "./events";
 import { InputProps } from "@/components/ui/input";
 
@@ -77,4 +77,8 @@ export interface ProductDetailsPageProps {
   params: {
     id: string;
   };
+}
+
+export interface ProductDetailsByIdProps {
+  product: (typeof SampleProductList)[0];
 }

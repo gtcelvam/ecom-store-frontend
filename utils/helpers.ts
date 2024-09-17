@@ -1,6 +1,7 @@
 import { onChangeEvent } from "@/types/events";
 import { CAROUSEL_IMAGE, SampleProductList } from "./constants";
 import toast from "react-hot-toast";
+import { AxiosError } from "axios";
 
 export const getAuthHeader = (details: any) => {
   return { authorization: `Bearer ${details?.token}` };
@@ -48,4 +49,17 @@ export const handleCookie = {
 
 export const handleToaster = () => {
   return toast;
+};
+
+export const handleSuccessMessage = (message: string) => {
+  handleToaster().success(message);
+};
+
+export const handleErrorMessage = (error: AxiosError | any) => {
+  if (!error?.response) {
+    handleToaster().error(error.message);
+    return;
+  }
+  const message = error?.response?.data?.message || "Something Went Wrong!";
+  handleToaster().error(message);
 };
