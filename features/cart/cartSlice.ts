@@ -1,7 +1,8 @@
+import { SampleProductList } from "@/utils/constants";
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  products: [],
+  products: [] as typeof SampleProductList,
 };
 
 const productSlice = createSlice({
