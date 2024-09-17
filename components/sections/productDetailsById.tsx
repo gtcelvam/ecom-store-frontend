@@ -14,10 +14,18 @@ const ProductDetailsById: FC<ProductDetailsByIdProps> = (params) => {
   const { product } = params;
 
   //state values
-  const { isUserLoggedIn } = useSelector((state: RootState) => state.user);
+  const {
+    user: { isUserLoggedIn },
+    cart: { products },
+  } = useSelector((state: RootState) => state);
 
   //hooks
   const dispatch = useDispatch();
+
+  //constants
+  const isAddedInCart = products.some((item) => item.id === product.id);
+  const buttonText = isAddedInCart ? "ADDED" : "ADD TO CART";
+  const buttonStyle = isAddedInCart ? "bg-shop-primary text-shop-white" : "";
 
   //functions
   const handleAddToCart = () => {
@@ -56,7 +64,9 @@ const ProductDetailsById: FC<ProductDetailsByIdProps> = (params) => {
             </span>
           </p>
         </div>
-        <Button onClick={handleAddToCart}>ADD TO CART</Button>
+        <Button className={buttonStyle} onClick={handleAddToCart}>
+          {buttonText}
+        </Button>
       </div>
       {/* Right Side Ends Here */}
     </div>
