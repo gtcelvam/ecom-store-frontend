@@ -1,7 +1,12 @@
 import { onChangeEvent } from "@/types/events";
-import { CAROUSEL_IMAGE, SampleProductList } from "./constants";
+import {
+  ADDITIONAL_CHARGE,
+  CAROUSEL_IMAGE,
+  SampleProductList,
+} from "./constants";
 import toast from "react-hot-toast";
 import { AxiosError } from "axios";
+import { ProductCard } from "@/types/constants";
 
 export const getAuthHeader = (details: any) => {
   return { authorization: `Bearer ${details?.token}` };
@@ -62,4 +67,22 @@ export const handleErrorMessage = (error: AxiosError | any) => {
   }
   const message = error?.response?.data?.message || "Something Went Wrong!";
   handleToaster().error(message);
+};
+
+const reducerFuction = (accum: number, current: number) => accum + current;
+
+export const handlePaymentSummary: (products: ProductCard[]) => {
+  orderSummary: number;
+  additionalCharges: number;
+  totalAmount: number;
+} = (products) => {
+  const orderSummary = products.reduce((a, b) => {
+    return a + Number(b.price);
+  }, 0);
+  const totalAmount = orderSummary + ADDITIONAL_CHARGE;
+  return {
+    orderSummary,
+    additionalCharges: ADDITIONAL_CHARGE,
+    totalAmount,
+  };
 };

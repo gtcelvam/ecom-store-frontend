@@ -3,6 +3,7 @@ import React, { FC, useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
+import { useRouter } from "next/navigation";
 import {
   Sheet,
   SheetContent,
@@ -25,6 +26,7 @@ import {
   handleUserLoginByToken,
   handleUserLogout,
 } from "@/features/user/userSlice";
+import { pageRoute } from "@/lib/apiList";
 
 const Header: FC<HeaderProps> = (props) => {
   //props
@@ -113,8 +115,14 @@ const RightSection: FC<LoggedInRightSectionProps> = (props) => {
   //state values
   const { products } = useSelector((state: RootState) => state.cart);
 
+  //hooks
+  const router = useRouter();
+
   //constants
   const productOnCart = products.length;
+
+  //functions
+  const handleCartRoute = () => router.push(pageRoute.cart);
 
   if (!Boolean(isUserLoggedIn && "name" in userData)) {
     return (
@@ -133,7 +141,9 @@ const RightSection: FC<LoggedInRightSectionProps> = (props) => {
         <Image
           width={20}
           height={20}
+          className="cursor-pointer"
           src={commonIcons.cartIcon}
+          onClick={handleCartRoute}
           alt="cart-icon"
         />
         <p className="cart-bag-image">{productOnCart}</p>
