@@ -18,6 +18,7 @@ export const BACKEND_URL = {
 };
 
 export const COOKIE_ACCESS_TOKEN = "access-token";
+export const ADDITIONAL_CHARGE = 50;
 
 export const LOGO_URL =
   "https://img.freepik.com/premium-vector/ts-logo-design-vector-illustration_742779-2098.jpg";

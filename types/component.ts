@@ -82,3 +82,7 @@ export interface ProductDetailsPageProps {
 export interface ProductDetailsByIdProps {
   product: (typeof SampleProductList)[0];
 }
+
+export interface CartItemComponentProps {
+  cartItem: ProductCard;
+}
