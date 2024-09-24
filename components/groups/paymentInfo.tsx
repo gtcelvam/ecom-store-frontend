@@ -12,10 +12,10 @@ const PaymentInfoComponent = () => {
   //constants
   const { orderSummary, additionalCharges, totalAmount } =
     handlePaymentSummary(products);
-  const commonStyles = "flex items-center justify-between m-8";
+  const commonStyles = "flex items-center justify-between m-4";
 
   return (
-    <div>
+    <div className="flex flex-col justify-center">
       {/* Section  */}
       <div className={commonStyles}>
         <p className="text-gray-400">Order Summary :</p>
@@ -43,7 +43,7 @@ const PaymentInfoComponent = () => {
         </p>
       </div>
       {/* Section Ends Here */}
-      <Button>Make Payment</Button>
+      <Button className="w-[200px] self-center">Make Payment</Button>
     </div>
   );
 };
