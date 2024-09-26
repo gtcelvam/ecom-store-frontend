@@ -12,6 +12,9 @@ export interface userDataType {
 export interface ProductCard {
   id: string | number;
   title: string;
-  image: string;
+  image: {
+    src: string;
+  };
   price?: string | number;
+  variants: { price: string | number }[];
 }

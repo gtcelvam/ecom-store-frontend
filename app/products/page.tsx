@@ -1,14 +1,29 @@
-import React from "react";
+"use client";
+import React, { useEffect } from "react";
 import SearchBar from "@/components/elements/searchBar";
 import { pageRoutes, SampleProductList } from "@/utils/constants";
 import { MixerHorizontalIcon } from "@radix-ui/react-icons";
 import ProductListCard from "@/components/elements/productListCard";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "@/lib/store";
+import { getProductListThunk } from "@/features/product/productThunks";
 
 const ProductsPage = () => {
+  //state values
+  const { productList } = useSelector((state: RootState) => state.product);
+
+  //hooks
+  const dispatch = useDispatch();
+
   //constants
   const commonStyles = {
     padding: "p-4",
   };
+
+  useEffect(() => {
+    dispatch<any>(getProductListThunk());
+  }, []);
+
   return (
     <div>
       {/* Top Section  */}
@@ -27,9 +42,9 @@ const ProductsPage = () => {
 
       {/* Main Section */}
       <div
-        className={`flex flex-col sm:flex-row items-center sm:items-start justify-center sm:justify-evenly gap-5 ${commonStyles.padding}`}
+        className={`flex flex-col flex-wrap sm:flex-row items-center sm:items-start justify-center sm:justify-evenly gap-5 ${commonStyles.padding}`}
       >
-        {SampleProductList.map((item) => (
+        {productList.map((item: any) => (
           <ProductListCard
             key={item.id}
             classImage="h-[350px]"

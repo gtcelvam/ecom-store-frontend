@@ -2,7 +2,7 @@ import { BACKEND_URL } from "@/utils/constants";
 import axios, { AxiosError, AxiosInstance, AxiosResponse } from "axios";
 
 const instance: AxiosInstance = axios.create({
-  baseURL: BACKEND_URL.prod,
+  baseURL: BACKEND_URL.dev,
   timeout: 10000,
   headers: {
     "Content-Type": "application/json",
