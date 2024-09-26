@@ -1,7 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { getProductListThunk } from "./productThunks";
+import { productIntialState } from "@/types/states";
 
-const initialState = {
+const initialState: productIntialState = {
   isProductLoading: false,
   productList: [],
   isProductError: false,
