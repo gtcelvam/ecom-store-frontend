@@ -42,20 +42,38 @@ export const showCaseList: ProductCard[] = [
   {
     id: 1,
     title: "Hoodies & Sweetshirt",
-    image:
-      "https://i5.walmartimages.com/asr/40c65bfe-c0d9-4f34-8246-750c91561e69.0ddc6280e3f716e93b6c593c2953a297.jpeg?odnHeight=768&odnWidth=768&odnBg=FFFFFF",
+    image: {
+      src: "https://i5.walmartimages.com/asr/40c65bfe-c0d9-4f34-8246-750c91561e69.0ddc6280e3f716e93b6c593c2953a297.jpeg?odnHeight=768&odnWidth=768&odnBg=FFFFFF",
+    },
+    variants: [
+      {
+        price: 200,
+      },
+    ],
   },
   {
     id: 2,
     title: "Coats & Parkas",
-    image:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnsOFWA4C4bbblRTw3VUE_ppfj5k3pEIHsZA&s",
+    image: {
+      src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnsOFWA4C4bbblRTw3VUE_ppfj5k3pEIHsZA&s",
+    },
+    variants: [
+      {
+        price: 200,
+      },
+    ],
   },
   {
     id: 3,
     title: "Tees & T-shirt",
-    image:
-      "https://rukminim2.flixcart.com/image/850/1000/kn0n6a80/t-shirt/r/w/d/l-plain-t-shirt-the-shopping-field-original-imagfrr8z7xfkrzh.jpeg?q=90&crop=false",
+    image: {
+      src: "https://rukminim2.flixcart.com/image/850/1000/kn0n6a80/t-shirt/r/w/d/l-plain-t-shirt-the-shopping-field-original-imagfrr8z7xfkrzh.jpeg?q=90&crop=false",
+    },
+    variants: [
+      {
+        price: 200,
+      },
+    ],
   },
 ];
 
@@ -63,14 +81,27 @@ export const youngFashionList: ProductCard[] = [
   {
     id: 1,
     title: "Trending on Instagram",
-    image:
-      "https://static.vecteezy.com/system/resources/previews/006/165/355/non_2x/portrait-of-cheerful-young-asian-woman-student-in-casual-clothes-with-backpack-using-laptop-and-pointing-at-camera-with-finger-isolated-on-yellow-background-education-in-college-university-concept-photo.jpg",
+    image: {
+      src: "https://static.vecteezy.com/system/resources/previews/006/165/355/non_2x/portrait-of-cheerful-young-asian-woman-student-in-casual-clothes-with-backpack-using-laptop-and-pointing-at-camera-with-finger-isolated-on-yellow-background-education-in-college-university-concept-photo.jpg",
+    },
+    variants: [
+      {
+        price: 200,
+      },
+    ],
   },
+
   {
     id: 2,
     title: "All under ₹500",
-    image:
-      "https://img.freepik.com/premium-photo/guy-with-red-curly-hair-red-tshirt-with-fashion-hat-yellow-background-unaltered_561613-14515.jpg",
+    image: {
+      src: "https://img.freepik.com/premium-photo/guy-with-red-curly-hair-red-tshirt-with-fashion-hat-yellow-background-unaltered_561613-14515.jpg",
+    },
+    variants: [
+      {
+        price: 200,
+      },
+    ],
   },
 ];
 
