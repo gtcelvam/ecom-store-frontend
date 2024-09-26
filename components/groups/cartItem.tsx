@@ -6,7 +6,7 @@ import { Input } from "../ui/input";
 const CartItemComponent: FC<CartItemComponentProps> = (props) => {
   //props
   const {
-    cartItem: { image, title, price },
+    cartItem: { image, title, variants },
   } = props;
 
   return (
@@ -15,11 +15,11 @@ const CartItemComponent: FC<CartItemComponentProps> = (props) => {
         className="w-[30px] sm:w-auto sm:h-auto"
         width={60}
         height={30}
-        src={image}
+        src={image.src}
         alt="cart-item"
       />
       <h1>{title}</h1>
-      <p>{price}</p>
+      <p>{variants[0].price}</p>
       <div className="flex items-center gap-4">
         <p>Quantity : </p>
         <Input className="w-12 px-2" type="number" defaultValue={0} min={0} />

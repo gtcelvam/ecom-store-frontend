@@ -31,7 +31,7 @@ const ProductCard: FC<ProductCardComponentProp> = (props) => {
           className={classImage + " sm:rounded-t-lg"}
           width={width}
           height={height}
-          src={card.image}
+          src={card.image.src}
           alt="show-case-card"
         />
         <CardTitle className="sm:w-[300px] px-2">{card.title}</CardTitle>

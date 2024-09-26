@@ -66,7 +66,7 @@ const ProductListCard: FC<ProductListCardComponentProps> = (props) => {
           className={classImage + " sm:rounded-t-lg"}
           width={width}
           height={height}
-          src={card.image}
+          src={card?.image?.src}
           alt="show-case-card"
         />
         {Boolean(!isLiked) && (
@@ -88,7 +88,7 @@ const ProductListCard: FC<ProductListCardComponentProps> = (props) => {
       <CardContent className="flex justify-between px-2 mt-2">
         <CardDescription>
           {RUPEES_SNIPPET}
-          {card.price}
+          {card.variants[0]?.price}
         </CardDescription>
         <div className="flex items-center gap-5">
           <Link href={href}>

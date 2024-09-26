@@ -1,8 +1,9 @@
+import { cartInitialState } from "@/types/states";
 import { SampleProductList } from "@/utils/constants";
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = {
-  products: [] as typeof SampleProductList,
+const initialState: cartInitialState = {
+  products: [],
 };
 
 const productSlice = createSlice({
