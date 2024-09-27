@@ -1,6 +1,7 @@
 import { ProductCard } from "@/types/constants";
 import SALES_DAY_PIC from "@/public/images/salesDay.webp";
 import CART_ICON from "@/public/icons/cart-bag.svg";
+import rippleBlackLoader from "@/public/loaders/ripple-loader-black.svg";
 
 export const pageRoutes = {
   home: "/",
@@ -226,4 +227,9 @@ export const socialMediaMetaContent = {
   description: "Shopping Site Project",
   image: LOGO_URL,
   url: "https://ts-e-store.vercel.app",
+};
+
+//loaders
+export const LOADERS = {
+  rippleBlackLoader,
 };

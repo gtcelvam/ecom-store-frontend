@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import CustomDialog from "../elements/CustomDialog";
 import {
   AuthenticationComponentProps,
@@ -15,9 +15,11 @@ import {
   loginFormDataType,
   signupFormDataType,
 } from "@/types/states";
-import { loginForm, signUpForm } from "@/utils/constants";
+import { LOADERS, loginForm, signUpForm } from "@/utils/constants";
 import { onChangeEvent } from "@/types/events";
 import { loginUser, signupUser } from "@/features/user/userThunks";
+import { RootState } from "@/lib/store";
+import { Loader } from "../elements/Loader";
 
 const AuthenticationComponent: FC<AuthenticationComponentProps> = (props) => {
   //props
@@ -25,6 +27,9 @@ const AuthenticationComponent: FC<AuthenticationComponentProps> = (props) => {
 
   //state values
   const [formData, setFormData] = useState<authFormDataType>(signUpForm);
+  const { isLoading: isAuthLoading } = useSelector(
+    (state: RootState) => state.user
+  );
 
   //functions
   const handleFormChange = (e: onChangeEvent) => {
@@ -72,7 +77,13 @@ const AuthenticationComponent: FC<AuthenticationComponentProps> = (props) => {
     <CustomDialog
       title={authenticationTitle.title as string}
       description={authenticationTitle.description as string}
-      buttonText={authenticationTitle.buttonText as string}
+      buttonText={
+        isAuthLoading ? (
+          <Loader {...LOADERS.rippleBlackLoader} />
+        ) : (
+          (authenticationTitle.buttonText as string)
+        )
+      }
       onSubmit={handleSubmit}
       handleClose={handleClose}
     >
