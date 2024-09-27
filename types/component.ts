@@ -3,6 +3,7 @@ import { AuthenticationType, ProductCard, userDataType } from "./constants";
 import { FooterCompanyLink, SampleProductList } from "@/utils/constants";
 import { onChangeEvent } from "./events";
 import { InputProps } from "@/components/ui/input";
+import { ImageProps } from "next/image";
 
 export interface HeaderProps {
   user: userDataType;
@@ -25,7 +26,7 @@ export interface HomeCarouselType {
 export interface CustomDialogProps {
   title: string;
   description: string;
-  buttonText: string;
+  buttonText: string | ReactNode;
   children: ReactNode;
   onSubmit: (data?: any) => void;
   handleClose: () => void;
@@ -85,4 +86,9 @@ export interface ProductDetailsByIdProps {
 
 export interface CartItemComponentProps {
   cartItem: ProductCard;
+}
+
+export interface LoaderComponentProps extends ImageProps {
+  containerClass: string;
+  loadingTxt?: string;
 }
