@@ -92,3 +92,7 @@ export interface LoaderComponentProps extends ImageProps {
   containerClass: string;
   loadingTxt?: string;
 }
+
+export interface SkeletonCardListProps {
+  count: number;
+}

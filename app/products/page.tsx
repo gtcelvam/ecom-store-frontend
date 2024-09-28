@@ -7,10 +7,13 @@ import ProductListCard from "@/components/elements/productListCard";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/lib/store";
 import { getProductListThunk } from "@/features/product/productThunks";
+import SkeletonCardList from "@/components/groups/skeleton/cardSkeleton";
 
 const ProductsPage = () => {
   //state values
-  const { productList } = useSelector((state: RootState) => state.product);
+  const { isProductLoading, productList } = useSelector(
+    (state: RootState) => state.product
+  );
 
   //hooks
   const dispatch = useDispatch();
@@ -23,6 +26,8 @@ const ProductsPage = () => {
   useEffect(() => {
     dispatch<any>(getProductListThunk());
   }, []);
+
+  if (isProductLoading) return <SkeletonCardList count={10} />;
 
   return (
     <div>
