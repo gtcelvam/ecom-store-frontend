@@ -86,3 +86,6 @@ export const handlePaymentSummary: (products: ProductCard[]) => {
     totalAmount,
   };
 };
+
+export const getArrayByCount = (count: number) =>
+  Array.from({ length: count }, (_, index) => index + 1);
