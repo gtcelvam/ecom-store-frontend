@@ -1,24 +1,46 @@
 import { cartInitialState } from "@/types/states";
-import { SampleProductList } from "@/utils/constants";
 import { createSlice } from "@reduxjs/toolkit";
+import { getCartListByUserIdThunk, handleAddToCartThunk } from "./cartThunks";
 
 const initialState: cartInitialState = {
+  isCartLoading: false,
   products: [],
+  isCartError: false,
 };
 
 const productSlice = createSlice({
-  name: "product",
+  name: "cart-slice",
   initialState: initialState,
-  reducers: {
-    handleAddToCartAction: (state, action) => {
-      state.products = [
-        ...state.products,
-        action.payload,
-      ] as typeof initialState.products;
-    },
+  reducers: {},
+  extraReducers: (builder) => {
+    //Add to cart case
+    builder.addCase(handleAddToCartThunk.pending, (state) => {
+      state.isCartLoading = true;
+    });
+    builder.addCase(handleAddToCartThunk.fulfilled, (state, action) => {
+      state.isCartLoading = false;
+      state.products = [...state.products, action.payload as any];
+    });
+    builder.addCase(handleAddToCartThunk.rejected, (state) => {
+      state.isCartLoading = false;
+      state.isCartError = true;
+    });
+
+    //Get Cart Details
+    builder.addCase(getCartListByUserIdThunk.pending, (state) => {
+      state.isCartLoading = true;
+    });
+    builder.addCase(getCartListByUserIdThunk.fulfilled, (state, action) => {
+      state.isCartLoading = false;
+      state.products = action.payload as any;
+    });
+    builder.addCase(getCartListByUserIdThunk.rejected, (state) => {
+      state.isCartLoading = false;
+      state.isCartError = true;
+    });
   },
 });
 
-export const { handleAddToCartAction } = productSlice.actions;
+export const {} = productSlice.actions;
 
 export default productSlice.reducer;

@@ -27,6 +27,7 @@ import {
   handleUserLogout,
 } from "@/features/user/userSlice";
 import { pageRoute } from "@/lib/apiList";
+import { getCartListByUserIdThunk } from "@/features/cart/cartThunks";
 
 const Header: FC<HeaderProps> = (props) => {
   //props
@@ -48,6 +49,10 @@ const Header: FC<HeaderProps> = (props) => {
   useEffect(() => {
     if (user) dispatch(handleUserLoginByToken(user));
   }, [user, dispatch]);
+
+  useEffect(() => {
+    if (isUserLoggedIn) dispatch<any>(getCartListByUserIdThunk(userData.id));
+  }, [isUserLoggedIn]);
 
   return (
     <div className="flex items-center justify-between bg-shop-white h-[50px] px-2">

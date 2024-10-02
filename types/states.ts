@@ -14,5 +14,7 @@ export interface productIntialState {
 }
 
 export interface cartInitialState {
+  isCartLoading: boolean;
   products: ProductCard[];
+  isCartError: boolean;
 }
