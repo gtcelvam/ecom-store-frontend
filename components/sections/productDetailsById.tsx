@@ -7,7 +7,8 @@ import { RootState } from "@/lib/store";
 import { ProductDetailsByIdProps } from "@/types/component";
 import { RUPEES_SNIPPET } from "@/utils/constants";
 import { handleToaster } from "@/utils/helpers";
-import { handleAddToCartAction } from "@/features/cart/cartSlice";
+import { handleAddToCartThunk } from "@/features/cart/cartThunks";
+import { addToCartAPIPayload } from "@/types/api";
 
 const ProductDetailsById: FC<ProductDetailsByIdProps> = (params) => {
   //props
@@ -15,7 +16,7 @@ const ProductDetailsById: FC<ProductDetailsByIdProps> = (params) => {
 
   //state values
   const {
-    user: { isUserLoggedIn },
+    user: { isUserLoggedIn, userData },
     cart: { products },
   } = useSelector((state: RootState) => state);
 
@@ -35,7 +36,11 @@ const ProductDetailsById: FC<ProductDetailsByIdProps> = (params) => {
       );
       return;
     }
-    dispatch(handleAddToCartAction(product));
+    const payload: addToCartAPIPayload = {
+      userId: userData?.id,
+      productId: [product?.id],
+    };
+    dispatch<any>(handleAddToCartThunk(payload));
   };
 
   return (
