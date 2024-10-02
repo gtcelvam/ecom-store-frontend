@@ -21,7 +21,8 @@ import {
 import { pageRoutes, RUPEES_SNIPPET } from "@/utils/constants";
 import { RootState } from "@/lib/store";
 import { handleToaster } from "@/utils/helpers";
-import { handleAddToCartAction } from "@/features/cart/cartSlice";
+import { handleAddToCartThunk } from "@/features/cart/cartThunks";
+import { addToCartAPIPayload } from "@/types/api";
 
 const ProductListCard: FC<ProductListCardComponentProps> = (props) => {
   //props
@@ -37,7 +38,7 @@ const ProductListCard: FC<ProductListCardComponentProps> = (props) => {
 
   //state values
   const {
-    user: { isUserLoggedIn },
+    user: { isUserLoggedIn, userData },
     cart: { products },
   } = useSelector((state: RootState) => state);
 
@@ -56,7 +57,11 @@ const ProductListCard: FC<ProductListCardComponentProps> = (props) => {
       );
       return;
     }
-    dispatch(handleAddToCartAction(card));
+    const payload: addToCartAPIPayload = {
+      userId: userData?.id,
+      productId: [card?.id],
+    };
+    dispatch<any>(handleAddToCartThunk(payload));
   };
 
   return (
@@ -96,7 +101,7 @@ const ProductListCard: FC<ProductListCardComponentProps> = (props) => {
           </Link>
           {!Boolean(isAddedInCart) && (
             <PlusIcon
-              className="font-bold"
+              className="font-bold cursor-pointer"
               width={18}
               height={18}
               onClick={handleAddToCart}

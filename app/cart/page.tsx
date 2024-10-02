@@ -7,6 +7,7 @@ import { RootState } from "@/lib/store";
 import CartItemComponent from "@/components/groups/cartItem";
 import PaymentInfoComponent from "@/components/groups/paymentInfo";
 import ShippingInformation from "@/components/groups/shippingInformation";
+import { getCartListByUserIdThunk } from "@/features/cart/cartThunks";
 
 const CartComponent = () => {
   //state values
@@ -24,6 +25,7 @@ const CartComponent = () => {
   useEffect(() => {
     if (!isUserLoggedIn) {
       router.push(pageRoute.home);
+      return;
     }
   }, [isUserLoggedIn]);
 

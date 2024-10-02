@@ -43,9 +43,10 @@ export const getUserDetails = async (token: string | undefined) => {
       const payload = {
         token,
       };
-      const { data }: any = await instance.get(authAPIList.getUser, {
-        headers: { ...getAuthHeader(payload) },
-      });
+      const { data }: any = await instance.get(
+        authAPIList.getUser,
+        getAuthHeader(payload)
+      );
       return data?.data;
     }
     return null;

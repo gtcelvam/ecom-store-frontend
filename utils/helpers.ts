@@ -9,7 +9,12 @@ import { AxiosError } from "axios";
 import { ProductCard } from "@/types/constants";
 
 export const getAuthHeader = (details: any) => {
-  return { authorization: `Bearer ${details?.token}` };
+  return {
+    headers: {
+      authorization: `Bearer ${details?.token}`,
+      "Content-Type": "application/json",
+    },
+  };
 };
 
 export const handleBannerList: () => Promise<string[]> = () => {
