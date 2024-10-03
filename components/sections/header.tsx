@@ -124,7 +124,7 @@ const RightSection: FC<LoggedInRightSectionProps> = (props) => {
   const router = useRouter();
 
   //constants
-  const productOnCart = products.length;
+  const productOnCart = products?.length || [];
 
   //functions
   const handleCartRoute = () => router.push(pageRoute.cart);

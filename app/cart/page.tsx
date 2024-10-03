@@ -7,12 +7,11 @@ import { RootState } from "@/lib/store";
 import CartItemComponent from "@/components/groups/cartItem";
 import PaymentInfoComponent from "@/components/groups/paymentInfo";
 import ShippingInformation from "@/components/groups/shippingInformation";
-import { getCartListByUserIdThunk } from "@/features/cart/cartThunks";
 
 const CartComponent = () => {
   //state values
   const {
-    user: { isUserLoggedIn },
+    user: { isUserLoggedIn, userData },
     cart: { products },
   } = useSelector((state: RootState) => state);
 
@@ -37,7 +36,11 @@ const CartComponent = () => {
       <div className="p-4">
         <h1 className="font-bold">Order Details</h1>
         {products.map((product) => (
-          <CartItemComponent key={product.id} cartItem={product} />
+          <CartItemComponent
+            key={product.id}
+            cartItem={product}
+            userId={userData.id}
+          />
         ))}
       </div>
       {/* Order Details Ends Here */}
