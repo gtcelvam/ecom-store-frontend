@@ -1,6 +1,14 @@
-import { addToCartAPIPayload, APIThunkResponseType } from "@/types/api";
+import {
+  addToCartAPIPayload,
+  APIThunkResponseType,
+  deleteFromCartAPIPayload,
+} from "@/types/api";
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { getCartListByUserId, handleAddToCartAPI } from "./cartAPI";
+import {
+  getCartListByUserId,
+  handleAddToCartAPI,
+  handleDeleteProductById,
+} from "./cartAPI";
 
 export const handleAddToCartThunk = createAsyncThunk<
   APIThunkResponseType,
@@ -13,3 +21,11 @@ export const getCartListByUserIdThunk = createAsyncThunk<
   APIThunkResponseType,
   string
 >("cart/getCartListByUserIdThunk", async (id) => await getCartListByUserId(id));
+
+export const handleDeleteProductByIdThunk = createAsyncThunk<
+  APIThunkResponseType,
+  deleteFromCartAPIPayload
+>(
+  "cart/handleDeleteProductByIdThunk",
+  async (payload) => await handleDeleteProductById(payload)
+);

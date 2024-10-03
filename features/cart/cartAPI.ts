@@ -1,6 +1,6 @@
 import { cartAPIList } from "@/lib/apiList";
 import instance from "@/lib/axios";
-import { addToCartAPIPayload } from "@/types/api";
+import { addToCartAPIPayload, deleteFromCartAPIPayload } from "@/types/api";
 import { COOKIE_ACCESS_TOKEN } from "@/utils/constants";
 import {
   getAuthHeader,
@@ -31,6 +31,22 @@ export const getCartListByUserId = async (id: string) => {
     return data?.data;
   } catch (error) {
     console.log("Get Cart List Error : ", error);
+    handleErrorMessage(error);
+  }
+};
+
+export const handleDeleteProductById = async (
+  payload: deleteFromCartAPIPayload
+) => {
+  try {
+    const token = handleCookie.get(COOKIE_ACCESS_TOKEN);
+    const { data }: any = await instance.delete(cartAPIList.addToCart, {
+      data: payload,
+      ...getAuthHeader({ token }),
+    });
+    return data?.data;
+  } catch (error) {
+    console.log("Delete from product by id Error : ", error);
     handleErrorMessage(error);
   }
 };

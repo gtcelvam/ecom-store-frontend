@@ -86,6 +86,7 @@ export interface ProductDetailsByIdProps {
 
 export interface CartItemComponentProps {
   cartItem: ProductCard;
+  userId: string | number;
 }
 
 export interface LoaderComponentProps extends ImageProps {

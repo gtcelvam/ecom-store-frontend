@@ -8,6 +8,11 @@ export type addToCartAPIPayload = {
   userId: string | number;
 };
 
+export type deleteFromCartAPIPayload = {
+  productId: string | number;
+  userId: string | number;
+};
+
 export type APIThunkResponseType = {
   success: boolean;
   data: userDataType;
