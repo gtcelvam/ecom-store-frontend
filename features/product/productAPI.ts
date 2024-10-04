@@ -10,3 +10,14 @@ export const getProductsByPage = async () => {
     throw error;
   }
 };
+
+export const getProductDetailsById = async (id: string) => {
+  try {
+    const url = `${productAPIList.getProducts}/${id}`;
+    const { data } = await instance.get(url);
+    return data?.data || null;
+  } catch (error) {
+    console.log("get product by id error : ", error);
+    throw error;
+  }
+};

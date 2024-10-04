@@ -18,11 +18,15 @@ import {
   HeartIcon,
   PlusIcon,
 } from "@radix-ui/react-icons";
-import { pageRoutes, RUPEES_SNIPPET } from "@/utils/constants";
+import { LOADERS, pageRoutes, RUPEES_SNIPPET } from "@/utils/constants";
 import { RootState } from "@/lib/store";
 import { handleToaster } from "@/utils/helpers";
-import { handleAddToCartThunk } from "@/features/cart/cartThunks";
-import { addToCartAPIPayload } from "@/types/api";
+import {
+  handleAddToCartThunk,
+  handleDeleteProductByIdThunk,
+} from "@/features/cart/cartThunks";
+import { addToCartAPIPayload, deleteFromCartAPIPayload } from "@/types/api";
+import { Loader } from "./Loader";
 
 const ProductListCard: FC<ProductListCardComponentProps> = (props) => {
   //props
@@ -39,7 +43,7 @@ const ProductListCard: FC<ProductListCardComponentProps> = (props) => {
   //state values
   const {
     user: { isUserLoggedIn, userData },
-    cart: { products },
+    cart: { products, isCartLoading },
   } = useSelector((state: RootState) => state);
 
   //hooks
@@ -62,6 +66,15 @@ const ProductListCard: FC<ProductListCardComponentProps> = (props) => {
       productId: [card?.id],
     };
     dispatch<any>(handleAddToCartThunk(payload));
+  };
+
+  //functions
+  const handleDeleteProduct = () => {
+    const paylaod: deleteFromCartAPIPayload = {
+      userId: userData.id,
+      productId: card.id,
+    };
+    dispatch<any>(handleDeleteProductByIdThunk(paylaod));
   };
 
   return (
@@ -99,7 +112,10 @@ const ProductListCard: FC<ProductListCardComponentProps> = (props) => {
           <Link href={href}>
             <EyeOpenIcon className="font-bold" width={18} height={18} />
           </Link>
-          {!Boolean(isAddedInCart) && (
+          {Boolean(isCartLoading) && (
+            <Loader {...LOADERS.tubeThemeLoader} loadingTxt="" />
+          )}
+          {!Boolean(isAddedInCart) && !isCartLoading && (
             <PlusIcon
               className="font-bold cursor-pointer"
               width={18}
@@ -107,11 +123,12 @@ const ProductListCard: FC<ProductListCardComponentProps> = (props) => {
               onClick={handleAddToCart}
             />
           )}
-          {Boolean(isAddedInCart) && (
+          {Boolean(isAddedInCart) && !isCartLoading && (
             <CheckIcon
-              className="font-bold text-shop-primary"
+              className="font-bold text-shop-primary cursor-pointer"
               width={18}
               height={18}
+              onClick={handleDeleteProduct}
             />
           )}
         </div>

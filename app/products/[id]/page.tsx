@@ -1,13 +1,13 @@
 import ProductDetailsById from "@/components/sections/productDetailsById";
+import { getProductDetailsById } from "@/features/product/productAPI";
 import { ProductDetailsPageProps } from "@/types/component";
-import { getProductDetailsById } from "@/utils/helpers";
 
 const ProductDetails = async ({ params }: ProductDetailsPageProps) => {
   //props
   const { id } = params;
 
   //constants
-  const data = await getProductDetailsById(parseInt(id));
+  const data = await getProductDetailsById(id);
 
   if (!Boolean(data)) return <>Something Went Wrong!!!</>;
 
