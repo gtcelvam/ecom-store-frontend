@@ -4,15 +4,21 @@ import { handlePaymentSummary } from "@/utils/helpers";
 import React from "react";
 import { useSelector } from "react-redux";
 import { Button } from "../ui/button";
+import { handleRazorPay } from "@/lib/payment";
 
 const PaymentInfoComponent = () => {
   //state values
   const { products } = useSelector((state: RootState) => state.cart);
 
+  console.log("products : ", products);
+
   //constants
   const { orderSummary, additionalCharges, totalAmount } =
     handlePaymentSummary(products);
   const commonStyles = "flex items-center justify-between m-4";
+
+  //funtions
+  const handleMakePayment = () => handleRazorPay(totalAmount);
 
   return (
     <div className="flex flex-col justify-center">
@@ -43,7 +49,9 @@ const PaymentInfoComponent = () => {
         </p>
       </div>
       {/* Section Ends Here */}
-      <Button className="w-[200px] self-center">Make Payment</Button>
+      <Button className="w-[200px] self-center" onClick={handleMakePayment}>
+        Make Payment
+      </Button>
     </div>
   );
 };

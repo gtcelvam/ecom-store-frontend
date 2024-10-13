@@ -8,6 +8,19 @@ import toast from "react-hot-toast";
 import { AxiosError } from "axios";
 import { ProductCard } from "@/types/constants";
 
+export const loadScipt = (src: string) => {
+  return new Promise((resolve) => {
+    const script = document.createElement("script");
+    script.src = src;
+
+    script.onload = () => resolve(true);
+
+    script.onerror = () => resolve(false);
+
+    document.body.appendChild(script);
+  });
+};
+
 export const getAuthHeader = (details: any) => {
   return {
     headers: {
@@ -82,7 +95,7 @@ export const handlePaymentSummary: (products: ProductCard[]) => {
   totalAmount: number;
 } = (products) => {
   const orderSummary = products.reduce((a, b) => {
-    return a + Number(b.price);
+    return a + Number(b.variants[0].price);
   }, 0);
   const totalAmount = orderSummary + ADDITIONAL_CHARGE;
   return {

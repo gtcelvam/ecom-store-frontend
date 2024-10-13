@@ -10,6 +10,9 @@ export const pageRoutes = {
   products: "/products",
 };
 
+//Razorypay
+export const RAZOR_PAY_ID = process.env.NEXT_PUBLIC_RAZOR_PAY_ID;
+
 //Snippets
 export const SNIPPET_COMMA = "&apos;";
 export const RUPEES_SNIPPET = "₹ ";
@@ -22,6 +25,8 @@ export const BACKEND_URL = {
 
 export const COOKIE_ACCESS_TOKEN = "access-token";
 export const ADDITIONAL_CHARGE = 50;
+
+export const RAZOR_PAY_URL = "https://checkout.razorpay.com/v1/checkout.js";
 
 export const LOGO_URL =
   "https://img.freepik.com/premium-vector/ts-logo-design-vector-illustration_742779-2098.jpg";
