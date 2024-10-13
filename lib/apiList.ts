@@ -17,3 +17,8 @@ export const pageRoute = {
   product: "/product",
   cart: "/cart",
 };
+
+export const paymentRoute = {
+  createPayment: "/payment/create-order",
+  verifyPayment: "/payment/verify-payment",
+};
