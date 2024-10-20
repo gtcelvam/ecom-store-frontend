@@ -10,6 +10,7 @@ export const productAPIList = {
 
 export const cartAPIList = {
   addToCart: "/cart",
+  clearCart: "/clear-cart",
 };
 
 export const pageRoute = {

@@ -2,9 +2,11 @@ import {
   handleAddToCartThunk,
   getCartListByUserIdThunk,
   handleDeleteProductByIdThunk,
+  clearCartThunk,
 } from "./cartThunks";
 import { createSlice } from "@reduxjs/toolkit";
 import { cartInitialState } from "@/types/states";
+import { getUpdatedProductList } from "@/utils/helpers";
 
 const initialState: cartInitialState = {
   isCartLoading: false,
@@ -49,9 +51,25 @@ const productSlice = createSlice({
     });
     builder.addCase(handleDeleteProductByIdThunk.fulfilled, (state, action) => {
       state.isCartLoading = false;
-      state.products = action.payload as any;
+      state.products = getUpdatedProductList(
+        state.products,
+        action.payload.data as any
+      );
     });
     builder.addCase(handleDeleteProductByIdThunk.rejected, (state) => {
+      state.isCartLoading = false;
+      state.isCartError = true;
+    });
+
+    //Clear Cart
+    builder.addCase(clearCartThunk.pending, (state) => {
+      state.isCartLoading = true;
+    });
+    builder.addCase(clearCartThunk.fulfilled, (state, action) => {
+      state.isCartLoading = false;
+      state.products = action.payload as any;
+    });
+    builder.addCase(clearCartThunk.rejected, (state) => {
       state.isCartLoading = false;
       state.isCartError = true;
     });

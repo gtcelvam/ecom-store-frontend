@@ -7,6 +7,7 @@ import {
 import {
   getCartListByUserId,
   handleAddToCartAPI,
+  handleClearCart,
   handleDeleteProductById,
 } from "./cartAPI";
 
@@ -28,4 +29,9 @@ export const handleDeleteProductByIdThunk = createAsyncThunk<
 >(
   "cart/handleDeleteProductByIdThunk",
   async (payload) => await handleDeleteProductById(payload)
+);
+
+export const clearCartThunk = createAsyncThunk(
+  "cart/clearCartThunk",
+  async (id: string) => await handleClearCart(id)
 );

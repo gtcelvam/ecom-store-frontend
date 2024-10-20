@@ -144,3 +144,14 @@ export const getCreateOrderPayload = (products: ProductCard[]) => {
   };
   return orderData;
 };
+
+export const getUpdatedProductList = (
+  productList: ProductCard[],
+  data: { productId: number[] }[]
+) => {
+  const { productId } = data[0];
+  const result = productList.filter((item) => {
+    if (productId.includes(item.id as any)) return item;
+  });
+  return result;
+};

@@ -44,9 +44,23 @@ export const handleDeleteProductById = async (
       data: payload,
       ...getAuthHeader({ token }),
     });
-    return data?.data;
+    return data || [];
   } catch (error) {
     console.log("Delete from product by id Error : ", error);
+    handleErrorMessage(error);
+  }
+};
+
+export const handleClearCart = async (id: string) => {
+  try {
+    const token = handleCookie.get(COOKIE_ACCESS_TOKEN);
+    const { data }: any = await instance.get(
+      cartAPIList.clearCart + "/" + id,
+      getAuthHeader({ token })
+    );
+    return [];
+  } catch (error) {
+    console.log("Clear Cart API Error : ", error);
     handleErrorMessage(error);
   }
 };
