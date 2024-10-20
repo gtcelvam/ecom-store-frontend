@@ -16,5 +16,5 @@ export interface ProductCard {
     src: string;
   };
   price?: string | number;
-  variants: { price: string | number }[];
+  variants: { id: number; price: string | number }[];
 }

@@ -7,6 +7,7 @@ import {
 import toast from "react-hot-toast";
 import { AxiosError } from "axios";
 import { ProductCard } from "@/types/constants";
+import store from "@/lib/store";
 
 export const loadScipt = (src: string) => {
   return new Promise((resolve) => {
@@ -107,3 +108,39 @@ export const handlePaymentSummary: (products: ProductCard[]) => {
 
 export const getArrayByCount = (count: number) =>
   Array.from({ length: count }, (_, index) => index + 1);
+
+export const getCreateOrderPayload = (products: ProductCard[]) => {
+  const userData = store.getState().user.userData;
+
+  const lineItems = products.map((item) => {
+    return {
+      variant_id: item.variants[0].id,
+      quantity: 1,
+    };
+  });
+  const orderData = {
+    line_items: lineItems,
+    email: userData.email,
+    shipping_address: {
+      first_name: userData.name,
+      last_name: "test",
+      address1: "123 Fake St",
+      phone: "555-555-5555",
+      city: "Fakecity",
+      province: "ON",
+      country: "CA",
+      zip: "A1A1A1",
+    },
+    billing_address: {
+      first_name: userData.name,
+      last_name: "test",
+      address1: "123 Fake St",
+      phone: "555-555-5555",
+      city: "Fakecity",
+      province: "ON",
+      country: "CA",
+      zip: "A1A1A1",
+    },
+  };
+  return orderData;
+};

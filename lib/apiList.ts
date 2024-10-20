@@ -18,6 +18,10 @@ export const pageRoute = {
   cart: "/cart",
 };
 
+export const orderRoute = {
+  order: "/order",
+};
+
 export const paymentRoute = {
   createPayment: "/payment/create-order",
   verifyPayment: "/payment/verify-payment",

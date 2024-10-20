@@ -47,6 +47,11 @@ export const commonIcons = {
   deleteIcon: DELETE_ICON,
 };
 
+export const paymentStatus = {
+  success: "Success",
+  failure: "Failure",
+};
+
 export const showCaseList: ProductCard[] = [
   {
     id: 1,
@@ -56,6 +61,7 @@ export const showCaseList: ProductCard[] = [
     },
     variants: [
       {
+        id: 1,
         price: 200,
       },
     ],
@@ -68,6 +74,7 @@ export const showCaseList: ProductCard[] = [
     },
     variants: [
       {
+        id: 2,
         price: 200,
       },
     ],
@@ -80,6 +87,7 @@ export const showCaseList: ProductCard[] = [
     },
     variants: [
       {
+        id: 3,
         price: 200,
       },
     ],
@@ -95,6 +103,7 @@ export const youngFashionList: ProductCard[] = [
     },
     variants: [
       {
+        id: 1,
         price: 200,
       },
     ],
@@ -106,11 +115,7 @@ export const youngFashionList: ProductCard[] = [
     image: {
       src: "https://img.freepik.com/premium-photo/guy-with-red-curly-hair-red-tshirt-with-fashion-hat-yellow-background-unaltered_561613-14515.jpg",
     },
-    variants: [
-      {
-        price: 200,
-      },
-    ],
+    variants: [{ id: 2, price: 200 }],
   },
 ];
 
