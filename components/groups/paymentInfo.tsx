@@ -1,16 +1,27 @@
 import { RootState } from "@/lib/store";
-import { RUPEES_SNIPPET } from "@/utils/constants";
-import { handlePaymentSummary } from "@/utils/helpers";
-import React from "react";
-import { useSelector } from "react-redux";
+import { LOADERS, RUPEES_SNIPPET } from "@/utils/constants";
+import {
+  getCreateOrderPayload,
+  handlePaymentSummary,
+  handleToaster,
+} from "@/utils/helpers";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Button } from "../ui/button";
 import { handleRazorPay } from "@/lib/payment";
+import { handleCreateOrder } from "@/features/order/orderAPI";
+import { Loader } from "../elements/Loader";
 
 const PaymentInfoComponent = () => {
   //state values
   const { products } = useSelector((state: RootState) => state.cart);
+  const {
+    userData: { id },
+  } = useSelector((state: RootState) => state.user);
+  const [isPaymentLoading, setIsPaymentLoading] = useState(false);
 
-  console.log("products : ", products);
+  //hooks
+  const dispatch = useDispatch();
 
   //constants
   const { orderSummary, additionalCharges, totalAmount } =
@@ -18,7 +29,27 @@ const PaymentInfoComponent = () => {
   const commonStyles = "flex items-center justify-between m-4";
 
   //funtions
-  const handleMakePayment = () => handleRazorPay(totalAmount);
+  const handleMakePayment = async () => {
+    setIsPaymentLoading(true);
+    try {
+      const payload = getCreateOrderPayload(products);
+      const orderResult = await handleCreateOrder(payload);
+
+      //payment payload
+      const paymentPayload = {
+        amount: totalAmount,
+        order: {
+          id: orderResult?.id,
+        },
+      };
+      await handleRazorPay(paymentPayload);
+    } catch (error) {
+      console.log("Handle Make Payment Error : ", error);
+      handleToaster().error("Payment Failed!!");
+    } finally {
+      setIsPaymentLoading(false);
+    }
+  };
 
   return (
     <div className="flex flex-col justify-center">
@@ -50,7 +81,11 @@ const PaymentInfoComponent = () => {
       </div>
       {/* Section Ends Here */}
       <Button className="w-[200px] self-center" onClick={handleMakePayment}>
-        Make Payment
+        {isPaymentLoading ? (
+          <Loader {...LOADERS.rippleBlackLoader} />
+        ) : (
+          "Make Payment"
+        )}
       </Button>
     </div>
   );

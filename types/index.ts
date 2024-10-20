@@ -1,7 +1,7 @@
 //Payment Functions
 export type handleRazorypayOptionsProps = {
   amount: string | number;
-  order: { id: string };
+  id: string;
 };
 
 export type razorpayHandlerProps = {
