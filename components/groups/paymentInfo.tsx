@@ -11,6 +11,7 @@ import { Button } from "../ui/button";
 import { handleRazorPay } from "@/lib/payment";
 import { handleCreateOrder } from "@/features/order/orderAPI";
 import { Loader } from "../elements/Loader";
+import { clearCartThunk } from "@/features/cart/cartThunks";
 
 const PaymentInfoComponent = () => {
   //state values
@@ -42,7 +43,9 @@ const PaymentInfoComponent = () => {
           id: orderResult?.id,
         },
       };
-      await handleRazorPay(paymentPayload);
+      handleRazorPay(paymentPayload).then(() =>
+        dispatch<any>(clearCartThunk(id))
+      );
     } catch (error) {
       console.log("Handle Make Payment Error : ", error);
       handleToaster().error("Payment Failed!!");

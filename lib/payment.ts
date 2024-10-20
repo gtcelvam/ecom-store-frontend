@@ -1,5 +1,6 @@
 import {
   COOKIE_ACCESS_TOKEN,
+  LOGO_URL,
   paymentStatus,
   RAZOR_PAY_ID,
   RAZOR_PAY_URL,
@@ -79,10 +80,9 @@ const handleRazorpayOptons = (payload: handleRazorypayOptionsProps) => {
     key: RAZOR_PAY_ID,
     currency: "INR",
     amount: Number(amount),
-    name: "TS Razor Pay Test",
+    name: "TS Razor Pay",
     description: "Thanks for purchasing",
-    image:
-      "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.freepik.com%2Ffree-photos-vectors%2Fmoney-png&psig=AOvVaw0DHOrpgot4oisKFiTZcdl6&ust=1691130308942000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCMigubztv4ADFQAAAAAdAAAAABAE",
+    image: LOGO_URL,
     order_id: id,
     modal: {
       ondismiss() {
