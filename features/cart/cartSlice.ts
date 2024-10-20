@@ -1,10 +1,10 @@
-import { cartInitialState } from "@/types/states";
-import { createSlice } from "@reduxjs/toolkit";
 import {
-  getCartListByUserIdThunk,
   handleAddToCartThunk,
+  getCartListByUserIdThunk,
   handleDeleteProductByIdThunk,
 } from "./cartThunks";
+import { createSlice } from "@reduxjs/toolkit";
+import { cartInitialState } from "@/types/states";
 
 const initialState: cartInitialState = {
   isCartLoading: false,

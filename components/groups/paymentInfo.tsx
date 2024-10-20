@@ -23,8 +23,6 @@ const PaymentInfoComponent = () => {
   //hooks
   const dispatch = useDispatch();
 
-  console.log("products : ", products);
-
   //constants
   const { orderSummary, additionalCharges, totalAmount } =
     handlePaymentSummary(products);
