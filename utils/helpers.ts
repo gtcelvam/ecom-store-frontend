@@ -147,11 +147,11 @@ export const getCreateOrderPayload = (products: ProductCard[]) => {
 
 export const getUpdatedProductList = (
   productList: ProductCard[],
-  data: { productId: number[] }[]
+  data: { id: string }
 ) => {
-  const { productId } = data[0];
+  const { id } = data;
   const result = productList.filter((item) => {
-    if (productId.includes(item.id as any)) return item;
+    if (item.id != id) return item;
   });
   return result;
 };

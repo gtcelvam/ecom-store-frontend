@@ -53,7 +53,7 @@ const productSlice = createSlice({
       state.isCartLoading = false;
       state.products = getUpdatedProductList(
         state.products,
-        action.payload.data as any
+        action.payload as any
       );
     });
     builder.addCase(handleDeleteProductByIdThunk.rejected, (state) => {
