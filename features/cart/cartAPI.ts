@@ -10,6 +10,7 @@ import {
 
 export const handleAddToCartAPI = async (payload: addToCartAPIPayload) => {
   const token = handleCookie.get(COOKIE_ACCESS_TOKEN);
+  payload.productId = payload.productId.map((item) => String(item));
   try {
     const { data }: any = await instance.post(
       cartAPIList.addToCart,
@@ -39,12 +40,13 @@ export const handleDeleteProductById = async (
   payload: deleteFromCartAPIPayload
 ) => {
   try {
+    payload.productId = String(payload.productId);
     const token = handleCookie.get(COOKIE_ACCESS_TOKEN);
     const { data }: any = await instance.delete(cartAPIList.addToCart, {
       data: payload,
       ...getAuthHeader({ token }),
     });
-    return data || [];
+    return data?.data || { id: null };
   } catch (error) {
     console.log("Delete from product by id Error : ", error);
     handleErrorMessage(error);
