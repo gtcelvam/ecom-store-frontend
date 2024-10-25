@@ -40,7 +40,7 @@ const ProductDetailsById: FC<ProductDetailsByIdProps> = (params) => {
       userId: userData?.id,
       productId: [product?.id],
     };
-    dispatch<any>(handleAddToCartThunk(payload));
+    dispatch<any>(handleAddToCartThunk({ payload }));
   };
 
   return (

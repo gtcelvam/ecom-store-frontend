@@ -1,5 +1,5 @@
 "use client";
-import { FC } from "react";
+import { FC, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
@@ -43,8 +43,9 @@ const ProductListCard: FC<ProductListCardComponentProps> = (props) => {
   //state values
   const {
     user: { isUserLoggedIn, userData },
-    cart: { products, isCartLoading },
+    cart: { products },
   } = useSelector((state: RootState) => state);
+  const [isAddCartLoading, setIsAddCartLoading] = useState(false);
 
   //hooks
   const dispatch = useDispatch();
@@ -65,10 +66,9 @@ const ProductListCard: FC<ProductListCardComponentProps> = (props) => {
       userId: userData?.id,
       productId: [card?.id],
     };
-    dispatch<any>(handleAddToCartThunk(payload));
+    dispatch<any>(handleAddToCartThunk({ payload, loader: handleLoader }));
   };
 
-  //functions
   const handleDeleteProduct = () => {
     const paylaod: deleteFromCartAPIPayload = {
       userId: userData.id,
@@ -76,6 +76,8 @@ const ProductListCard: FC<ProductListCardComponentProps> = (props) => {
     };
     dispatch<any>(handleDeleteProductByIdThunk(paylaod));
   };
+
+  const handleLoader = (value: boolean) => setIsAddCartLoading(value);
 
   return (
     <Card className={`w-70 sm:w-[300px] sm:p-0 sm:rounded-lg ${className}`}>
@@ -112,10 +114,10 @@ const ProductListCard: FC<ProductListCardComponentProps> = (props) => {
           <Link href={href}>
             <EyeOpenIcon className="font-bold" width={18} height={18} />
           </Link>
-          {Boolean(isCartLoading) && (
+          {Boolean(isAddCartLoading) && (
             <Loader {...LOADERS.tubeThemeLoader} loadingTxt="" />
           )}
-          {!Boolean(isAddedInCart) && !isCartLoading && (
+          {!Boolean(isAddedInCart) && !isAddCartLoading && (
             <PlusIcon
               className="font-bold cursor-pointer"
               width={18}
@@ -123,7 +125,7 @@ const ProductListCard: FC<ProductListCardComponentProps> = (props) => {
               onClick={handleAddToCart}
             />
           )}
-          {Boolean(isAddedInCart) && !isCartLoading && (
+          {Boolean(isAddedInCart) && !isAddCartLoading && (
             <CheckIcon
               className="font-bold text-shop-primary cursor-pointer"
               width={18}

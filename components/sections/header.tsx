@@ -124,7 +124,7 @@ const RightSection: FC<LoggedInRightSectionProps> = (props) => {
   const router = useRouter();
 
   //constants
-  const productOnCart = products?.length || [];
+  const productOnCart = products?.length || 0;
 
   //functions
   const handleCartRoute = () => router.push(pageRoute.cart);
@@ -151,7 +151,9 @@ const RightSection: FC<LoggedInRightSectionProps> = (props) => {
           onClick={handleCartRoute}
           alt="cart-icon"
         />
-        <p className="cart-bag-image">{productOnCart}</p>
+        {Boolean(productOnCart) && (
+          <p className="cart-bag-image">{productOnCart}</p>
+        )}
       </div>
       <Button className="hidden sm:block" onClick={handleLogout}>
         LOG OUT

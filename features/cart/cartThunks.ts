@@ -1,5 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import {
+  addToCartAPIArgs,
   addToCartAPIPayload,
   APIThunkResponseType,
   deleteFromCartAPIPayload,
@@ -13,9 +14,9 @@ import {
 
 export const handleAddToCartThunk = createAsyncThunk<
   APIThunkResponseType,
-  addToCartAPIPayload
->("cart/handleAddToCartThunk", async (payload) => {
-  return await handleAddToCartAPI(payload);
+  addToCartAPIArgs
+>("cart/handleAddToCartThunk", async (args) => {
+  return await handleAddToCartAPI(args.payload, args.loader);
 });
 
 export const getCartListByUserIdThunk = createAsyncThunk<

@@ -233,6 +233,7 @@ export const defaultUserData = {
   email: "",
   id: "",
   mobile: "",
+  cartId: "",
 };
 
 export const socialMediaMetaContent = {
