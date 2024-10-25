@@ -10,7 +10,7 @@ export type addToCartAPIPayload = {
 
 export type addToCartAPIArgs = {
   payload: addToCartAPIPayload;
-  loader: (value: boolean) => void;
+  loader?: (value: boolean) => void;
 };
 
 export type deleteFromCartAPIPayload = {
