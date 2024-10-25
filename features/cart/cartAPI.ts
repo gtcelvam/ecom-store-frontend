@@ -8,10 +8,14 @@ import {
   handleErrorMessage,
 } from "@/utils/helpers";
 
-export const handleAddToCartAPI = async (payload: addToCartAPIPayload) => {
+export const handleAddToCartAPI = async (
+  payload: addToCartAPIPayload,
+  loader: (value: boolean) => void
+) => {
   const token = handleCookie.get(COOKIE_ACCESS_TOKEN);
   payload.productId = payload.productId.map((item) => String(item));
   try {
+    loader(true);
     const { data }: any = await instance.post(
       cartAPIList.addToCart,
       payload,
@@ -21,6 +25,8 @@ export const handleAddToCartAPI = async (payload: addToCartAPIPayload) => {
   } catch (error) {
     console.log("Handle Add To Cart Error : ", error);
     handleErrorMessage(error);
+  } finally {
+    loader(false);
   }
 };
 

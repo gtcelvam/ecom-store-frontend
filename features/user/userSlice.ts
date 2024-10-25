@@ -13,6 +13,7 @@ const initialState = {
     email: "",
     id: "",
     mobile: "",
+    cartId: "",
   },
   isUserLoggedIn: false,
   isError: false,

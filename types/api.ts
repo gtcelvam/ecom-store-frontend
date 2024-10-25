@@ -8,6 +8,11 @@ export type addToCartAPIPayload = {
   userId: string | number;
 };
 
+export type addToCartAPIArgs = {
+  payload: addToCartAPIPayload;
+  loader: (value: boolean) => void;
+};
+
 export type deleteFromCartAPIPayload = {
   productId: string | number;
   userId: string | number;
