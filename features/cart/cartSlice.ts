@@ -1,10 +1,10 @@
+import { createSlice } from "@reduxjs/toolkit";
 import {
   handleAddToCartThunk,
   getCartListByUserIdThunk,
   handleDeleteProductByIdThunk,
   clearCartThunk,
 } from "./cartThunks";
-import { createSlice } from "@reduxjs/toolkit";
 import { cartInitialState } from "@/types/states";
 import { getUpdatedProductList } from "@/utils/helpers";
 
@@ -12,12 +12,17 @@ const initialState: cartInitialState = {
   isCartLoading: false,
   products: [],
   isCartError: false,
+  isSuccessModelOpen: false,
 };
 
 const productSlice = createSlice({
   name: "cart-slice",
   initialState: initialState,
-  reducers: {},
+  reducers: {
+    handleSuccessModel: (state, action) => {
+      state.isSuccessModelOpen = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     //Add to cart case
     builder.addCase(handleAddToCartThunk.pending, (state) => {
@@ -76,6 +81,6 @@ const productSlice = createSlice({
   },
 });
 
-export const {} = productSlice.actions;
+export const { handleSuccessModel } = productSlice.actions;
 
 export default productSlice.reducer;

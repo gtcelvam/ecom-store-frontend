@@ -18,3 +18,15 @@ export interface ProductCard {
   price?: string | number;
   variants: { id: number; price: string | number }[];
 }
+
+export interface OrderDetails {
+  id: string | number;
+  created_at: string;
+  email: string;
+  total_price: string;
+  line_items: {
+    id: string;
+    name: string;
+    quantity: number;
+  }[];
+}
