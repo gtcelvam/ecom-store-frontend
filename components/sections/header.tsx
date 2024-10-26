@@ -71,9 +71,11 @@ const Header: FC<HeaderProps> = (props) => {
         <Link href={pageRoutes.products}>
           <p className="text-shop-black font-medium	cursor-pointer">FAVOURITE</p>
         </Link>
-        <Link href={pageRoutes.products}>
-          <p className="text-shop-black font-medium	cursor-pointer">LIFESTYLE</p>
-        </Link>
+        {isUserLoggedIn && (
+          <Link href={pageRoutes.orders}>
+            <p className="text-shop-black font-medium	cursor-pointer">ORDERS</p>
+          </Link>
+        )}
       </div>
       {/* Menus Ends Here */}
 
@@ -213,11 +215,13 @@ const MobileRightNavComponent: FC<MobileRightMenuComponentProps> = (props) => {
                 FAVOURITE
               </p>
             </Link>
-            <Link href={pageRoutes.products}>
-              <p className="text-shop-black font-medium	cursor-pointer">
-                LIFESTYLE
-              </p>
-            </Link>
+            {isUserLoggedIn && (
+              <Link href={pageRoutes.orders}>
+                <p className="text-shop-black font-medium	cursor-pointer">
+                  ORDERS
+                </p>
+              </Link>
+            )}
           </div>
           {/* Menus Ends Here */}
           <SheetFooter className="flex-col gap-3">

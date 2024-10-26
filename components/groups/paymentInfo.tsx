@@ -42,6 +42,7 @@ const PaymentInfoComponent = () => {
         order: {
           id: orderResult?.id,
         },
+        dispatch,
       };
       handleRazorPay(paymentPayload).then(() =>
         dispatch<any>(clearCartThunk(id))

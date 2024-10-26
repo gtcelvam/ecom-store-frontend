@@ -21,6 +21,7 @@ export const pageRoute = {
 
 export const orderRoute = {
   order: "/order",
+  getOrderDetails: "/order-details",
 };
 
 export const paymentRoute = {

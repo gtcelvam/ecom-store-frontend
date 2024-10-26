@@ -8,6 +8,7 @@ import tubeThemeLoader from "@/public/loaders/tube-loader-theme.svg";
 export const pageRoutes = {
   home: "/",
   products: "/products",
+  orders: "/orders",
 };
 
 //Razorypay
@@ -155,6 +156,8 @@ export const SampleProductList = [
 ];
 
 export const SALES_DAY_IMAGE = SALES_DAY_PIC;
+export const PAYMENT_SUCCESS_URL =
+  "https://cdn2.iconfinder.com/data/icons/weby-flat-vol-1/512/1_Approved-check-checkbox-confirm-green-success-tick-512.png";
 
 export const FooterCompanyLink = [
   {

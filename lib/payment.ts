@@ -15,28 +15,33 @@ import {
   loadScipt,
 } from "@/utils/helpers";
 import { paymentRoute } from "./apiList";
+import { Dispatch } from "react";
+import { UnknownAction } from "@reduxjs/toolkit";
+import { handleSuccessModel } from "@/features/cart/cartSlice";
 
 interface razoryPaymentPayload {
   amount: number;
   order: {
     id: number;
   };
+  dispatch: Dispatch<UnknownAction>;
 }
 
 export const handleRazorPay = async (payload: razoryPaymentPayload) => {
   //constant
   const token = handleCookie.get(COOKIE_ACCESS_TOKEN);
+  const { dispatch, ...rest } = payload;
   try {
     const res = await loadScipt(RAZOR_PAY_URL);
     if (!res) return alert("You're offline");
 
     const {
       data: { data: order },
-    } = await instance.post(paymentRoute.createPayment, payload, {
+    } = await instance.post(paymentRoute.createPayment, rest, {
       ...getAuthHeader({ token }),
     });
 
-    const options = handleRazorpayOptons(order);
+    const options = handleRazorpayOptons({ ...order, dispatch });
     const paymentObject = new (window as any).Razorpay(options);
     paymentObject.open();
   } catch (error) {
@@ -44,7 +49,10 @@ export const handleRazorPay = async (payload: razoryPaymentPayload) => {
   }
 };
 
-export const handleVerifyPayment = async (res: razorpayHandlerProps) => {
+export const handleVerifyPayment = async (
+  res: razorpayHandlerProps,
+  dispatch: Dispatch<UnknownAction>
+) => {
   //constant
   const token = handleCookie.get(COOKIE_ACCESS_TOKEN);
   try {
@@ -64,6 +72,7 @@ export const handleVerifyPayment = async (res: razorpayHandlerProps) => {
     );
     if (result.data === paymentStatus.success) {
       handleSuccessMessage("Payment successful!");
+      dispatch(handleSuccessModel(true));
     } else if (result.data === paymentStatus.failure) {
       handleErrorMessage("Payment failed. Please try again.");
     }
@@ -74,7 +83,7 @@ export const handleVerifyPayment = async (res: razorpayHandlerProps) => {
 };
 
 const handleRazorpayOptons = (payload: handleRazorypayOptionsProps) => {
-  const { id, amount } = payload;
+  const { id, amount, dispatch } = payload;
 
   return {
     key: RAZOR_PAY_ID,
@@ -90,7 +99,7 @@ const handleRazorpayOptons = (payload: handleRazorypayOptionsProps) => {
       },
     },
     handler: async (res: razorpayHandlerProps) => {
-      handleVerifyPayment(res);
+      handleVerifyPayment(res, dispatch);
     },
     prefill: {
       name: "Testing Purpose",

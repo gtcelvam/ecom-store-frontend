@@ -1,13 +1,13 @@
-import { onChangeEvent } from "@/types/events";
+import toast from "react-hot-toast";
+import { AxiosError } from "axios";
 import {
   ADDITIONAL_CHARGE,
   CAROUSEL_IMAGE,
   SampleProductList,
 } from "./constants";
-import toast from "react-hot-toast";
-import { AxiosError } from "axios";
 import { ProductCard } from "@/types/constants";
 import store from "@/lib/store";
+import moment from "moment";
 
 export const loadScipt = (src: string) => {
   return new Promise((resolve) => {
@@ -121,6 +121,11 @@ export const getCreateOrderPayload = (products: ProductCard[]) => {
   const orderData = {
     line_items: lineItems,
     email: userData.email,
+    customer: {
+      id: userData.id, // Existing customer ID, or omit if adding new customer details
+      email: userData.email,
+      first_name: userData.name,
+    },
     shipping_address: {
       first_name: userData.name,
       last_name: "test",
@@ -154,4 +159,8 @@ export const getUpdatedProductList = (
     if (item.id != id) return item;
   });
   return result;
+};
+
+export const formatDate = (timestamp: string) => {
+  return moment(timestamp).format("D MMM YYYY"); // e.g., "13 Oct 2024"
 };
