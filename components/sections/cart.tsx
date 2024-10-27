@@ -7,6 +7,8 @@ import PaymentInfoComponent from "../groups/paymentInfo";
 import CartItemComponent from "../groups/cartItem";
 import { useRouter } from "next/navigation";
 import PaymentSuccessModel from "../groups/paymentSuccessModel";
+import Image from "next/image";
+import { commonIcons } from "@/utils/constants";
 
 const CartComponent = () => {
   //state values
@@ -30,7 +32,13 @@ const CartComponent = () => {
 
   if (isCartEmpty)
     return (
-      <div className="min-h-[60vh]">
+      <div className="flex flex-col items-center justify-center min-h-[60vh]">
+        <Image
+          src={commonIcons.emptyCart}
+          width={150}
+          height={100}
+          alt="empty-cart"
+        />
         <p className="text-center p-4">No Product Available in Cart</p>
         <PaymentSuccessModel />
       </div>

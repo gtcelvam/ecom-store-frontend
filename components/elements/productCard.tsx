@@ -27,14 +27,16 @@ const ProductCard: FC<ProductCardComponentProp> = (props) => {
   return (
     <Card className={`w-70 sm:w-[300px] sm:p-0 sm:rounded-lg ${className}`}>
       <CardHeader className={`sm:w-[300px] p-0 ${classHead}`}>
-        <Image
-          className={classImage + " sm:rounded-t-lg"}
-          width={width}
-          height={height}
-          src={card.image.src}
-          alt="show-case-card"
-        />
-        <CardTitle className="sm:w-[300px] px-2">{card.title}</CardTitle>
+        <Link href={href}>
+          <Image
+            className={classImage + " sm:rounded-t-lg"}
+            width={width}
+            height={height}
+            src={card.image.src}
+            alt="show-case-card"
+          />
+          <CardTitle className="sm:w-[300px] px-2">{card.title}</CardTitle>
+        </Link>
       </CardHeader>
       <CardContent className="flex justify-between px-2">
         <CardDescription>explore more</CardDescription>

@@ -7,11 +7,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { handleDeleteProductByIdThunk } from "@/features/cart/cartThunks";
 import { deleteFromCartAPIPayload } from "@/types/api";
 import { RootState } from "@/lib/store";
+import { onChangeEvent } from "@/types/events";
+import { handleQuantityByProductId } from "@/features/cart/cartSlice";
 
 const CartItemComponent: FC<CartItemComponentProps> = (props) => {
   //props
   const {
-    cartItem: { id, image, title, variants },
+    cartItem: { id, image, title, variants, quantity },
     userId,
   } = props;
 
@@ -35,6 +37,14 @@ const CartItemComponent: FC<CartItemComponentProps> = (props) => {
     dispatch<any>(handleDeleteProductByIdThunk(paylaod));
   };
 
+  const handleQuantity = (e: onChangeEvent) => {
+    const payload = {
+      productId: id,
+      value: e.target.value || 1,
+    };
+    dispatch(handleQuantityByProductId(payload));
+  };
+
   return (
     <div className="flex items-center justify-between px-4 py-2 border-b-[1px] border-gray-300">
       <Image
@@ -48,7 +58,13 @@ const CartItemComponent: FC<CartItemComponentProps> = (props) => {
       <p>{variants[0].price}</p>
       <div className="flex items-center gap-4">
         <p>Quantity : </p>
-        <Input className="w-12 px-2" type="number" defaultValue={0} min={0} />
+        <Input
+          className="w-12 px-2"
+          type="number"
+          defaultValue={quantity || 1}
+          min={1}
+          onChange={handleQuantity}
+        />
       </div>
       <h1 className="font-bold">L</h1>
       <div>

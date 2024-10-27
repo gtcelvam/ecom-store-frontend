@@ -49,7 +49,7 @@ export const getProductDetailsById: (
 export const handleCookie = {
   set: (name: string, value: string) => {
     const date = new Date();
-    date.setTime(date.getTime() + 24 * 60 * 60 * 1000);
+    date.setTime(date.getTime() + 24 * 60 * 60 * 1000 * 7);
     const expires = `expires=${date.toUTCString()}`;
     document.cookie = `${name}=${value}; ${expires}; path="/`;
   },
@@ -96,7 +96,7 @@ export const handlePaymentSummary: (products: ProductCard[]) => {
   totalAmount: number;
 } = (products) => {
   const orderSummary = products.reduce((a, b) => {
-    return a + Number(b.variants[0].price);
+    return a + Number(b.variants[0].price) * Number(b.quantity || 1);
   }, 0);
   const totalAmount = orderSummary + ADDITIONAL_CHARGE;
   return {
@@ -115,7 +115,7 @@ export const getCreateOrderPayload = (products: ProductCard[]) => {
   const lineItems = products.map((item) => {
     return {
       variant_id: item.variants[0].id,
-      quantity: 1,
+      quantity: item.quantity || 1,
     };
   });
   const orderData = {

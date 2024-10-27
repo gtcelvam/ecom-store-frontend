@@ -48,7 +48,7 @@ const ProductDetailsById: FC<ProductDetailsByIdProps> = (params) => {
       {/* Left Side */}
       <div>
         <Image
-          src={product.image}
+          src={product.image.src}
           width={500}
           height={50}
           alt="Product-Image"
@@ -65,7 +65,7 @@ const ProductDetailsById: FC<ProductDetailsByIdProps> = (params) => {
             PRICE :{" "}
             <span>
               {RUPEES_SNIPPET}
-              {product.price}
+              {product.variants[0].price}
             </span>
           </p>
         </div>

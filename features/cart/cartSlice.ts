@@ -22,6 +22,18 @@ const productSlice = createSlice({
     handleSuccessModel: (state, action) => {
       state.isSuccessModelOpen = action.payload;
     },
+    handleQuantityByProductId: (state, action) => {
+      const productId = state.products.findIndex(
+        (item) => item.id === action.payload.productId
+      );
+      const updatedProduct = {
+        ...state.products[productId],
+        quantity: action.payload.value,
+      };
+      const newProductList = state.products;
+      newProductList[productId] = updatedProduct;
+      state.products = newProductList;
+    },
   },
   extraReducers: (builder) => {
     //Add to cart case
@@ -81,6 +93,7 @@ const productSlice = createSlice({
   },
 });
 
-export const { handleSuccessModel } = productSlice.actions;
+export const { handleSuccessModel, handleQuantityByProductId } =
+  productSlice.actions;
 
 export default productSlice.reducer;
