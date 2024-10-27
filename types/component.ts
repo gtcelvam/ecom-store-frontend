@@ -81,7 +81,7 @@ export interface ProductDetailsPageProps {
 }
 
 export interface ProductDetailsByIdProps {
-  product: (typeof SampleProductList)[0];
+  product: ProductCard;
 }
 
 export interface CartItemComponentProps {

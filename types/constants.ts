@@ -17,6 +17,7 @@ export interface ProductCard {
   };
   price?: string | number;
   variants: { id: number; price: string | number }[];
+  quantity?: number;
 }
 
 export interface OrderDetails {

@@ -2,6 +2,7 @@ import { ProductCard } from "@/types/constants";
 import SALES_DAY_PIC from "@/public/images/salesDay.webp";
 import CART_ICON from "@/public/icons/cart-bag.svg";
 import DELETE_ICON from "@/public/icons/delete.svg";
+import EMPTY_CART from "@/public/icons/empty-card.png";
 import rippleBlackLoader from "@/public/loaders/ripple-loader-black.svg";
 import tubeThemeLoader from "@/public/loaders/tube-loader-theme.svg";
 
@@ -46,6 +47,7 @@ export const commonStyles = {
 export const commonIcons = {
   cartIcon: CART_ICON,
   deleteIcon: DELETE_ICON,
+  emptyCart: EMPTY_CART,
 };
 
 export const paymentStatus = {

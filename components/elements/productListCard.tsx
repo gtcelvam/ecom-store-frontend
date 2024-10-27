@@ -82,13 +82,15 @@ const ProductListCard: FC<ProductListCardComponentProps> = (props) => {
   return (
     <Card className={`w-70 sm:w-[300px] sm:p-0 sm:rounded-lg ${className}`}>
       <CardHeader className={`relative sm:w-[300px] p-0 ${classHead}`}>
-        <Image
-          className={classImage + " sm:rounded-t-lg"}
-          width={width}
-          height={height}
-          src={card?.image?.src}
-          alt="show-case-card"
-        />
+        <Link href={href}>
+          <Image
+            className={classImage + " sm:rounded-t-lg"}
+            width={width}
+            height={height}
+            src={card?.image?.src}
+            alt="show-case-card"
+          />
+        </Link>
         {Boolean(!isLiked) && (
           <HeartIcon
             className="absolute top-0 left-3 text-shop-primary"
