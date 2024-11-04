@@ -41,7 +41,11 @@ export const handleRazorPay = async (payload: razoryPaymentPayload) => {
       ...getAuthHeader({ token }),
     });
 
-    const options = handleRazorpayOptons({ ...order, dispatch });
+    const options = handleRazorpayOptons({
+      ...order,
+      dispatch,
+      orderId: rest.order.id,
+    });
     const paymentObject = new (window as any).Razorpay(options);
     paymentObject.open();
   } catch (error) {
@@ -60,6 +64,7 @@ export const handleVerifyPayment = async (
       razorpay_order_id: res.razorpay_order_id,
       razorpay_payment_id: res.razorpay_payment_id,
       razorpay_signature: res.razorpay_signature,
+      orderId: res.orderId,
     };
 
     // Verify payment on the backend
@@ -83,7 +88,7 @@ export const handleVerifyPayment = async (
 };
 
 const handleRazorpayOptons = (payload: handleRazorypayOptionsProps) => {
-  const { id, amount, dispatch } = payload;
+  const { id, amount, orderId, dispatch } = payload;
 
   return {
     key: RAZOR_PAY_ID,
@@ -99,7 +104,7 @@ const handleRazorpayOptons = (payload: handleRazorypayOptionsProps) => {
       },
     },
     handler: async (res: razorpayHandlerProps) => {
-      handleVerifyPayment(res, dispatch);
+      handleVerifyPayment({ ...res, orderId }, dispatch);
     },
     prefill: {
       name: "Testing Purpose",
