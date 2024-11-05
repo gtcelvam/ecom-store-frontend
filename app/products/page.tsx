@@ -57,12 +57,12 @@ const ProductsPage = () => {
     <div>
       {/* Top Section  */}
       <div
-        className={`flex items-center justify-between ${commonStyles.padding}`}
+        className={`flex items-center justify-between ${commonStyles.padding} gap-4`}
       >
         <div>
           <h1>PRODUCTS</h1>
         </div>
-        <div className="flex flex-col relative w-[50%] items-center justify-center">
+        <div className="flex flex-col relative w-full sm:w-[50%] items-center justify-center">
           <SearchBar
             placeholder="Search For Product Here..."
             onChange={handleSearch}
