@@ -36,6 +36,12 @@ export interface CustomSearchBarProps extends InputProps {
   [key: string]: any;
 }
 
+export interface CustomDropDownProps {
+  isOpen: boolean;
+  list: { title: string; id: string | number }[];
+  onClick: (id: string | number) => void;
+}
+
 export interface SocialIconProps {
   icon: ReactNode;
 }

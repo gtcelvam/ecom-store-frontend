@@ -13,7 +13,7 @@ const SearchBar: FC<CustomSearchBarProps> = (props) => {
   } = props;
 
   return (
-    <div className="flex items-center justify-center gap-4 w-[50%] border border-solid border-gray-200 rounded-lg pr-2">
+    <div className="flex items-center justify-center gap-4 w-full sm:w-[50%] border border-solid border-gray-200 rounded-lg pr-2">
       <Input
         className={className}
         type={type}
