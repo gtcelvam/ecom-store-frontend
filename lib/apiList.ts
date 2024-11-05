@@ -6,6 +6,7 @@ export const authAPIList = {
 
 export const productAPIList = {
   getProducts: "/products",
+  searchProduct: "/products/search",
 };
 
 export const cartAPIList = {
@@ -15,7 +16,7 @@ export const cartAPIList = {
 
 export const pageRoute = {
   home: "/",
-  product: "/product",
+  product: "/products",
   cart: "/cart",
 };
 

@@ -21,3 +21,14 @@ export const getProductDetailsById = async (id: string) => {
     throw error;
   }
 };
+
+export const getProductByKeyword = async (keyword: string) => {
+  try {
+    const url = `${productAPIList.searchProduct}/${keyword}`;
+    const { data } = await instance.get(url);
+    return data?.data || null;
+  } catch (error) {
+    console.log("get product by keyword error : ", error);
+    throw error;
+  }
+};

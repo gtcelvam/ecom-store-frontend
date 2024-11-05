@@ -164,3 +164,13 @@ export const getUpdatedProductList = (
 export const formatDate = (timestamp: string) => {
   return moment(timestamp).format("D MMM YYYY"); // e.g., "13 Oct 2024"
 };
+
+export const debounce = (cb: (...args: any) => void, delay: number = 300) => {
+  let timer: any;
+  return (...args: any) => {
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      cb(...args);
+    }, delay);
+  };
+};
