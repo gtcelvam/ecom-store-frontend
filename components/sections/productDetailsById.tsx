@@ -5,10 +5,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { Button } from "@/components/ui/button";
 import { RootState } from "@/lib/store";
 import { ProductDetailsByIdProps } from "@/types/component";
-import { RUPEES_SNIPPET } from "@/utils/constants";
+import { LOADERS, RUPEES_SNIPPET } from "@/utils/constants";
 import { handleToaster } from "@/utils/helpers";
 import { handleAddToCartThunk } from "@/features/cart/cartThunks";
 import { addToCartAPIPayload } from "@/types/api";
+import { Loader } from "../elements/Loader";
 
 const ProductDetailsById: FC<ProductDetailsByIdProps> = (params) => {
   //props
@@ -17,7 +18,7 @@ const ProductDetailsById: FC<ProductDetailsByIdProps> = (params) => {
   //state values
   const {
     user: { isUserLoggedIn, userData },
-    cart: { products },
+    cart: { products, isCartLoading },
   } = useSelector((state: RootState) => state);
 
   //hooks
@@ -70,7 +71,11 @@ const ProductDetailsById: FC<ProductDetailsByIdProps> = (params) => {
           </p>
         </div>
         <Button className={buttonStyle} onClick={handleAddToCart}>
-          {buttonText}
+          {isCartLoading ? (
+            <Loader {...LOADERS.rippleBlackLoader} />
+          ) : (
+            buttonText
+          )}
         </Button>
       </div>
       {/* Right Side Ends Here */}
