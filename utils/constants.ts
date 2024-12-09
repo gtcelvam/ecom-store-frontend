@@ -253,3 +253,9 @@ export const LOADERS = {
   rippleBlackLoader,
   tubeThemeLoader,
 };
+
+//third-party-urls
+export const THIRD_PARTY_URLS = {
+  googleImg:
+    "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/480px-Google_%22G%22_logo.svg.png",
+};

@@ -20,6 +20,7 @@ import { onChangeEvent } from "@/types/events";
 import { loginUser, signupUser } from "@/features/user/userThunks";
 import { RootState } from "@/lib/store";
 import { Loader } from "../elements/Loader";
+import OAuthComponent from "./oAuthComponent";
 
 const AuthenticationComponent: FC<AuthenticationComponentProps> = (props) => {
   //props
@@ -173,6 +174,7 @@ const SignInComponent: FC<SignInComponentProps<signupFormDataType>> = (
           Login
         </span>
       </p>
+      <OAuthComponent />
     </div>
   );
 };
@@ -212,6 +214,7 @@ const LoginComponent: FC<SignInComponentProps<loginFormDataType>> = (props) => {
           Sign Up
         </span>
       </p>
+      <OAuthComponent />
     </div>
   );
 };
