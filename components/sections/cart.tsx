@@ -21,7 +21,7 @@ const CartComponent = () => {
   const router = useRouter();
 
   //constants
-  const isCartEmpty = !Boolean(products.length);
+  const isCartEmpty = !Boolean(products?.length);
 
   useEffect(() => {
     if (!isUserLoggedIn) {

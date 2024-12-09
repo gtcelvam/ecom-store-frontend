@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Head from "next/head";
 import { cookies } from "next/headers";
 import { Inter } from "next/font/google";
 import { Toaster } from "react-hot-toast";
@@ -6,10 +7,9 @@ import Header from "@/components/sections/header";
 import Footer from "@/components/sections/footer";
 import { COOKIE_ACCESS_TOKEN, socialMediaMetaContent } from "@/utils/constants";
 import Providers from "./provider";
-import "./globals.css";
 import { getUserDetails } from "@/features/user/userAPIs";
-import Head from "next/head";
 import SocialMediaPreview from "@/components/groups/socialMediaPreview";
+import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
