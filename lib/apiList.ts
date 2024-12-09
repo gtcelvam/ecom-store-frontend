@@ -2,6 +2,7 @@ export const authAPIList = {
   signup: "/user",
   login: "/login",
   getUser: "/user",
+  googleOAuth: "/user/google/callback",
 };
 
 export const productAPIList = {

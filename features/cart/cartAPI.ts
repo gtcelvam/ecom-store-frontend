@@ -32,6 +32,7 @@ export const handleAddToCartAPI = async (
 
 export const getCartListByUserId = async (id: string) => {
   const token = handleCookie.get(COOKIE_ACCESS_TOKEN);
+  if (!token) return;
   try {
     const url = `${cartAPIList.addToCart}/${id}`;
     const { data }: any = await instance.get(url, getAuthHeader({ token }));

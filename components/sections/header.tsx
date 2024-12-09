@@ -13,7 +13,12 @@ import {
 } from "@/components/ui/sheet";
 import { Button } from "../ui/button";
 import AuthenticationComponent from "../groups/login";
-import { commonIcons, LOGO_URL, pageRoutes } from "@/utils/constants";
+import {
+  commonIcons,
+  COOKIE_ACCESS_TOKEN,
+  LOGO_URL,
+  pageRoutes,
+} from "@/utils/constants";
 import { HamburgerMenuIcon } from "@radix-ui/react-icons";
 import {
   HeaderProps,
@@ -28,6 +33,8 @@ import {
 } from "@/features/user/userSlice";
 import { pageRoute } from "@/lib/apiList";
 import { getCartListByUserIdThunk } from "@/features/cart/cartThunks";
+import { handleCookie } from "@/utils/helpers";
+import { getUserDetails } from "@/features/user/userAPIs";
 
 const Header: FC<HeaderProps> = (props) => {
   //props
@@ -51,8 +58,18 @@ const Header: FC<HeaderProps> = (props) => {
   }, [user, dispatch]);
 
   useEffect(() => {
-    if (isUserLoggedIn) dispatch<any>(getCartListByUserIdThunk(userData.id));
-  }, [isUserLoggedIn]);
+    const accessToken = handleCookie.get(COOKIE_ACCESS_TOKEN) ?? null;
+    //This part of code for OAuth Intergration
+    if (Boolean(accessToken) && !isUserLoggedIn && !user) {
+      (async () => {
+        const userDetailsForOAuth = await getUserDetails(accessToken as string);
+        dispatch(handleUserLoginByToken(userDetailsForOAuth[0]));
+      })();
+      return;
+    }
+    if (isUserLoggedIn && userData?.id)
+      dispatch<any>(getCartListByUserIdThunk(userData.id));
+  }, [isUserLoggedIn, userData, dispatch, user]);
 
   return (
     <div className="flex items-center justify-between bg-shop-white h-[50px] px-2">
